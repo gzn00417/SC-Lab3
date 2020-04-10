@@ -7,9 +7,4 @@ public abstract class LocationMutability extends PlanningEntryDecorators {
         //TODO Auto-generated constructor stub
     }
 
-    @Override
-    public void work1() {
-        planningEntry.work1();
-        System.out.println("LocationMutability");
-    }
 }

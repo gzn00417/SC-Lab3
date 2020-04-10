@@ -1,14 +1,18 @@
 package planningEntry;
 
+import location.*;
+import resource.*;
+import timeSlot.*;
+
 /**
- * 
- * @author guozn
- *
+ * a flight plan containing information of plane, locations and time slot
  */
 public class FlightSchedule extends CommonPlanningEntry {
+    private final Resource resource;
+    private final Location location;
+    private final TimeSlot timeSlot;
 
-    @Override
-    public void work1() {
+    public FlightSchedule() {
         System.out.println("Flight");
     }
 
