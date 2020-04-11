@@ -22,8 +22,8 @@ public class EntryState {
      * @return true if the setting is successful, false if not
      */
     public Boolean setNewState(String strPlanningEntryType, String strNewState) {
-        if (this.setAvailability(strPlanningEntryType, strNewState)) {
-            this.state = EntryStateEnum.valueOf(strNewState);
+        if (this.setAvailability(strPlanningEntryType, strNewState.toUpperCase())) {
+            this.state = EntryStateEnum.valueOf(strNewState.toUpperCase());
             return true;
         }
         return false;
@@ -38,7 +38,7 @@ public class EntryState {
     private Boolean setAvailability(String strPlanningEntryType, String strNewState) {
         List<EntryStateEnum> availableStatesList = new ArrayList<EntryStateEnum>(
                 Arrays.asList(this.getState().newStateAchievable(strPlanningEntryType)));
-        return availableStatesList.contains(EntryStateEnum.valueOf(strNewState));
+        return availableStatesList.contains(EntryStateEnum.valueOf(strNewState.toUpperCase()));
     }
 
     public String getStrState() {

@@ -6,7 +6,7 @@ import resource.*;
 import timeSlot.*;
 
 /**
- * @author guozn
+ * common planning entry implements similar methods in 3 types of planning entry
  */
 public abstract class CommonPlanningEntry<R> implements PlanningEntry<R> {
     protected R resource;
@@ -15,17 +15,16 @@ public abstract class CommonPlanningEntry<R> implements PlanningEntry<R> {
     protected EntryState state;
     protected String strPlanningEntryType;
 
-    public CommonPlanningEntry(Location location, TimeSlot timeSlot, EntryState state) {
+    public CommonPlanningEntry(Location location, TimeSlot timeSlot) {
         this.location = location;
         this.timeSlot = timeSlot;
-        this.state = state;
         state = new EntryState("Waiting");
     }
 
     @Override
     public Boolean allocateResource(R resource) {
         this.resource = resource;
-        return this.state.setNewState(strPlanningEntryType, "Allocate");
+        return this.state.setNewState(strPlanningEntryType, "Allocated");
     }
 
     @Override
@@ -35,7 +34,7 @@ public abstract class CommonPlanningEntry<R> implements PlanningEntry<R> {
 
     @Override
     public Boolean cancel() {
-        return this.state.setNewState(strPlanningEntryType, "Cancel");
+        return this.state.setNewState(strPlanningEntryType, "Cancelled");
     }
 
     @Override
@@ -47,4 +46,25 @@ public abstract class CommonPlanningEntry<R> implements PlanningEntry<R> {
     public R getResource() {
         return this.resource;
     }
+
+    @Override
+    public Location getLocation() {
+        return this.location;
+    }
+
+    @Override
+    public TimeSlot getTimeSlot() {
+        return this.timeSlot;
+    }
+
+    @Override
+    public EntryState getState() {
+        return this.state;
+    }
+
+    @Override
+    public String getStrPlanningEntryType() {
+        return strPlanningEntryType;
+    }
+
 }

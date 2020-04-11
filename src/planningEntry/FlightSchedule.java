@@ -10,8 +10,8 @@ import timeSlot.*;
  */
 public class FlightSchedule<R> extends CommonPlanningEntry<R> {
 
-    public FlightSchedule(R resource, Location location, TimeSlot timeSlot, EntryState state) {
-        super(location, timeSlot, state);
+    public FlightSchedule(Location location, TimeSlot timeSlot) {
+        super(location, timeSlot);
         this.strPlanningEntryType = "FlightSchedule";
         System.out.println("FlightSchedule");
     }
