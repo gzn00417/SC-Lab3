@@ -10,5 +10,4 @@ public abstract class PlanningEntryDecorators implements PlanningEntry {
         this.planningEntry = planningEntry;
     }
 
-    public abstract void work1();
 }

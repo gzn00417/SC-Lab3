@@ -3,6 +3,7 @@ package timeSlot;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * immutable object
@@ -24,4 +25,40 @@ public class TimeSlot {
      * Safety:
      * do not provide mutator
      */
+
+    public TimeSlot(List<LocalDateTime> arrival, List<LocalDateTime> leaving) {
+        this.arrival.addAll(arrival);
+        this.leaving.addAll(leaving);
+        System.out.println(this.toString());
+    }
+
+    public List<LocalDateTime> getArrival() {
+        return this.arrival;
+    }
+
+    public List<LocalDateTime> getLeaving() {
+        return this.leaving;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof TimeSlot)) {
+            return false;
+        }
+        TimeSlot timeSlot = (TimeSlot) o;
+        return Objects.equals(arrival, timeSlot.arrival) && Objects.equals(leaving, timeSlot.leaving);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(arrival, leaving);
+    }
+
+    @Override
+    public String toString() {
+        return "{" + " arrival='" + getArrival() + "'" + ", leaving='" + getLeaving() + "'" + "}";
+    }
+
 }
