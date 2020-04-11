@@ -21,8 +21,8 @@ public interface PlanningEntry<R> {
         if (strPlanningEntryType.equals("FlightSchedule")) {
             return new FlightSchedule<R>(location, timeSlot);
         }
-        //Train
-        //Activity
+        //TrainSchedule
+        //ActivityCalendar
         return null;
     }
 
