@@ -1,8 +1,8 @@
 package planningEntry;
 
-public class ImmutableLocation extends LocationMutability {
+public class ImmutableLocation<R> extends LocationMutability<R> {
 
-    public ImmutableLocation(PlanningEntry planningEntry) {
+    public ImmutableLocation(PlanningEntry<R> planningEntry) {
         super(planningEntry);
         //TODO Auto-generated constructor stub
     }

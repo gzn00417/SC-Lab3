@@ -20,6 +20,6 @@ public class PlanningEntryTest {
                         LocalDateTime.parse("2020-02-02 12:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))),
                 Arrays.asList(LocalDateTime.parse("2020-01-01 10:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
                         LocalDateTime.parse("2020-02-02 12:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))));
-        PlanningEntry planningEntry = PlanningEntry.newPlanningEntry("Flight", resource, location, timeSlot);
+        PlanningEntry<Plane> planningEntry = PlanningEntry.newPlanningEntry("Flight", resource, location, timeSlot);
     }
 }

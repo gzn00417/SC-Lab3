@@ -12,11 +12,11 @@ public class Plane implements Resource {
     private final int intSeats;
     private final double age;
 
-    public Plane(String number, String strType, int intSeats, double d) {
+    public Plane(String number, String strType, int intSeats, double age) {
         this.number = number;
         this.strType = strType;
         this.intSeats = intSeats;
-        this.age = d;
+        this.age = age;
         System.out.println(this.toString());
     }
 

@@ -5,6 +5,6 @@ package planningEntry;
  * @author guozn
  *
  */
-public class ActivityCalendar extends CommonPlanningEntry {
+public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
 
 }

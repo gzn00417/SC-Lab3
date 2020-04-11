@@ -9,10 +9,24 @@ import java.util.Objects;
  * state of one planning entry
  */
 public class EntryState {
-    private final EntryStateEnum state;
+    private EntryStateEnum state;
 
     public EntryState(String stateName) {
-        this.state = EntryStateEnum.valueOf(stateName);
+        this.state = EntryStateEnum.valueOf(stateName.toUpperCase());
+    }
+
+    /**
+     * set the new state
+     * @param strPlanningEntryType
+     * @param strNewState
+     * @return true if the setting is successful, false if not
+     */
+    public Boolean setNewState(String strPlanningEntryType, String strNewState) {
+        if (this.setAvailability(strPlanningEntryType, strNewState)) {
+            this.state = EntryStateEnum.valueOf(strNewState);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -21,7 +35,7 @@ public class EntryState {
      * @param strNewState
      * @return true if the current state can be transferred to the new state, false if not
      */
-    public Boolean setAvailability(String strPlanningEntryType, String strNewState) {
+    private Boolean setAvailability(String strPlanningEntryType, String strNewState) {
         List<EntryStateEnum> availableStatesList = new ArrayList<EntryStateEnum>(
                 Arrays.asList(this.getState().newStateAchievable(strPlanningEntryType)));
         return availableStatesList.contains(EntryStateEnum.valueOf(strNewState));

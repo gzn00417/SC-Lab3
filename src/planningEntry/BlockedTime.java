@@ -1,8 +1,8 @@
 package planningEntry;
 
-public abstract class BlockedTime extends PlanningEntryDecorators {
+public abstract class BlockedTime<R> extends PlanningEntryDecorators<R> {
 
-    public BlockedTime(PlanningEntry planningEntry) {
+    public BlockedTime(PlanningEntry<R> planningEntry) {
         super(planningEntry);
         //TODO Auto-generated constructor stub
     }

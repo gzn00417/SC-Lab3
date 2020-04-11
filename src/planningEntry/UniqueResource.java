@@ -1,6 +1,6 @@
 package planningEntry;
 
-public class UniqueResource extends ResourceOrder {
+public class UniqueResource<R> extends ResourceOrder<R> {
 
     public UniqueResource(PlanningEntry planningEntry) {
         super(planningEntry);

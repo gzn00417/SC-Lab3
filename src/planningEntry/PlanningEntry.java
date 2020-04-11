@@ -8,7 +8,7 @@ import timeSlot.TimeSlot;
 /**
  * @author guozn
  */
-public interface PlanningEntry {
+public interface PlanningEntry<R> {
     /**
      * a factory method for generating an instance of planning entry
      * @param strPlanningEntryType
@@ -17,24 +17,32 @@ public interface PlanningEntry {
      * @param timeSlot
      * @return a empty instance of planning entry
      */
-    public static PlanningEntry newPlanningEntry(String strPlanningEntryType, Resource resource, Location location,
-            TimeSlot timeSlot) {
+    public static <R> PlanningEntry<R> newPlanningEntry(String strPlanningEntryType, Resource resource,
+            Location location, TimeSlot timeSlot) {
         if (strPlanningEntryType.equals("Flight")) {
-            return new DoubleLocation(new MutableLocation(new UniqueResource(
-                    new ContinuousTime(new SettableTime(new FlightSchedule(resource, location, timeSlot))))));
+            return new DoubleLocation<R>(new MutableLocation<R>(new UniqueResource<R>(
+                    new ContinuousTime<R>(new SettableTime<R>(new FlightSchedule<R>(resource, location, timeSlot))))));
         }
         //Train
         //Activity
         return null;
     }
 
-    public Resource getResource();
+    public Boolean allocateResource(R resource);
 
-    public Location getLocation();
+    public Boolean start();
 
-    public TimeSlot getTimeSlot();
+    public Boolean cancel();
 
-    public String getStrPlanningEntryType();
+    public Boolean finish();
 
-    public EntryState setState(String strState);
+    public R getResource();
+
+    //public Location getLocation();
+
+    //public TimeSlot getTimeSlot();
+
+    //public EntryState getState();
+
+    //public String getStrPlanningEntryType();
 }

@@ -18,7 +18,7 @@ public enum EntryStateEnum {
                     new EntryStateEnum[] {}, ENDED, new EntryStateEnum[] {}));
 
     public EntryStateEnum[] newStateAchievable(String strPlanningEntryType) {
-        if (strPlanningEntryType.equals("Train"))
+        if (strPlanningEntryType.equals("TrainSchedule"))
             return EntryStateEnum.newStateAchievableBlockedAble.get(this);
         return EntryStateEnum.newStateAchievableBlockedDisable.get(this);
     }

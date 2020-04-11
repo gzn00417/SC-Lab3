@@ -1,15 +1,9 @@
 package planningEntry;
 
-public abstract class LocationNumber extends PlanningEntryDecorators {
+public abstract class LocationNumber<R> extends PlanningEntryDecorators<R> {
 
-    public LocationNumber(PlanningEntry planningEntry) {
+    public LocationNumber(PlanningEntry<R> planningEntry) {
         super(planningEntry);
         //TODO Auto-generated constructor stub
-    }
-
-    @Override
-    public void work1() {
-        planningEntry.work1();
-        System.out.println("LocationNumber");
     }
 }

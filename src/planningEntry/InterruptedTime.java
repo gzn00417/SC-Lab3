@@ -1,8 +1,8 @@
 package planningEntry;
 
-public class InterruptedTime extends BlockedTime {
+public class InterruptedTime<R> extends BlockedTime<R> {
 
-    public InterruptedTime(PlanningEntry planningEntry) {
+    public InterruptedTime(PlanningEntry<R> planningEntry) {
         super(planningEntry);
         //TODO Auto-generated constructor stub
     }

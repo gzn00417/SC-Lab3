@@ -1,6 +1,6 @@
 package planningEntry;
 
-public class SingleLocation extends LocationNumber {
+public class SingleLocation<R> extends LocationNumber<R> {
 
     public SingleLocation(PlanningEntry planningEntry) {
         super(planningEntry);

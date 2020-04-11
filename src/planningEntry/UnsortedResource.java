@@ -1,6 +1,6 @@
 package planningEntry;
 
-public class UnsortedResource extends ResourceOrder {
+public class UnsortedResource<R> extends ResourceOrder<R> {
 
     public UnsortedResource(PlanningEntry planningEntry) {
         super(planningEntry);

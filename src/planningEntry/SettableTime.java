@@ -1,6 +1,6 @@
 package planningEntry;
 
-public class SettableTime extends PlanningEntryDecorators {
+public class SettableTime<R> extends PlanningEntryDecorators<R> {
 
     public SettableTime(PlanningEntry planningEntry) {
         super(planningEntry);

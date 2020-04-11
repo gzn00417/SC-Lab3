@@ -1,6 +1,6 @@
 package planningEntry;
 
-public class SortedResource extends ResourceOrder {
+public class SortedResource<R> extends ResourceOrder<R> {
 
     public SortedResource(PlanningEntry planningEntry) {
         super(planningEntry);
