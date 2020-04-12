@@ -17,7 +17,6 @@ public class Plane implements Resource {
         this.strType = strType;
         this.intSeats = intSeats;
         this.age = age;
-        System.out.println(this.toString());
     }
 
     public String getNumber() {

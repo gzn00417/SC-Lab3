@@ -1,6 +1,7 @@
 package timeSlot;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -26,10 +27,11 @@ public class TimeSlot {
      * do not provide mutator
      */
 
-    public TimeSlot(List<LocalDateTime> arrival, List<LocalDateTime> leaving) {
-        this.arrival.addAll(arrival);
-        this.leaving.addAll(leaving);
-        System.out.println(this.toString());
+    public TimeSlot(List<String> arrival, List<String> leaving) {
+        for (String strDateTime : arrival)
+            this.arrival.add(LocalDateTime.parse(strDateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        for (String strDateTime : leaving)
+            this.leaving.add(LocalDateTime.parse(strDateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
     }
 
     public List<LocalDateTime> getArrival() {

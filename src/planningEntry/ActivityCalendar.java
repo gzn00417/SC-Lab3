@@ -1,10 +1,6 @@
 package planningEntry;
 
-import java.util.Arrays;
-
-import entryState.*;
 import location.*;
-import resource.*;
 import timeSlot.*;
 
 /**
@@ -12,11 +8,19 @@ import timeSlot.*;
  */
 public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
     private static final int CONST_INDEX = 0;
+    private R oneResource;
+    private int intResourceNumber;
 
     public ActivityCalendar(Location location, TimeSlot timeSlot) {
         super(location, timeSlot);
         this.strPlanningEntryType = "ActivityCalendar";
         System.out.println("ActivityCalendar");
+    }
+
+    public Boolean allocateResource(R resource, int intResourceNumber) {
+        this.oneResource = resource;
+        this.intResourceNumber = intResourceNumber;
+        return this.state.setNewState(strPlanningEntryType, "Allocated");
     }
 
     public String getStrLocation() {
@@ -31,11 +35,15 @@ public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
         return super.getTimeSlot().getArrival().get(CONST_INDEX).toString();
     }
 
-    public String getOneResource() {
-        return super.getResource().toString();
+    public R getDocument() {
+        return this.oneResource;
+    }
+
+    public int getIntResourceNumber() {
+        return this.intResourceNumber;
     }
 
     public void setNewLocation(String strNewLocation) {
-        this.location = new Location(Arrays.asList(strNewLocation));
+        this.location = new Location(strNewLocation);
     }
 }

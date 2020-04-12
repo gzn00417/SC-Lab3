@@ -1,18 +1,31 @@
 package planningEntry;
 
-import entryState.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import location.*;
-import resource.*;
 import timeSlot.*;
 
 /**
  * a train plan containing several trains
  */
 public class TrainSchedule<R> extends CommonPlanningEntry<R> {
+    private final List<R> resources = new ArrayList<>();
+
     public TrainSchedule(Location location, TimeSlot timeSlot) {
         super(location, timeSlot);
         this.strPlanningEntryType = "TrainSchedule";
         System.out.println("TrainSchedule");
+    }
+
+    public Boolean allocateResource(R... resources) {
+        this.resources.addAll(Arrays.asList(resources));
+        return this.state.setNewState(strPlanningEntryType, "Allocated");
+    }
+
+    public R getTrainOfIndex(int index) {
+        return this.resources.get(index);
     }
 
     public String getLocationOfIndex(int index) {

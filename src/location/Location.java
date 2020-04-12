@@ -21,9 +21,9 @@ public class Location {
      * do not provide mutator
      */
 
-    public Location(List<String> locations) {
-        this.locations.addAll(locations);
-        System.out.println(this.toString());
+    public Location(String... locations) {
+        for (String str : locations)
+            this.locations.add(str);
     }
 
     public List<String> getLocations() {

@@ -9,7 +9,6 @@ import timeSlot.*;
  * common planning entry implements similar methods in 3 types of planning entry
  */
 public abstract class CommonPlanningEntry<R> implements PlanningEntry<R> {
-    protected R resource;
     protected Location location;
     protected TimeSlot timeSlot;
     protected EntryState state;
@@ -22,14 +21,13 @@ public abstract class CommonPlanningEntry<R> implements PlanningEntry<R> {
     }
 
     @Override
-    public Boolean allocateResource(R resource) {
-        this.resource = resource;
-        return this.state.setNewState(strPlanningEntryType, "Allocated");
+    public Boolean start() {
+        return this.state.setNewState(strPlanningEntryType, "Running");
     }
 
     @Override
-    public Boolean start() {
-        return this.state.setNewState(strPlanningEntryType, "Running");
+    public Boolean block() {
+        return this.state.setNewState(strPlanningEntryType, "Blocked");
     }
 
     @Override
@@ -40,11 +38,6 @@ public abstract class CommonPlanningEntry<R> implements PlanningEntry<R> {
     @Override
     public Boolean finish() {
         return this.state.setNewState(strPlanningEntryType, "Ended");
-    }
-
-    @Override
-    public R getResource() {
-        return this.resource;
     }
 
     @Override

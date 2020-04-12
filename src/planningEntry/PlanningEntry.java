@@ -2,39 +2,49 @@ package planningEntry;
 
 import entryState.EntryState;
 import location.Location;
-import resource.Resource;
 import timeSlot.TimeSlot;
 
 /**
- * @author guozn
+ * 
  */
 public interface PlanningEntry<R> {
     /**
-     * a factory method for generating an instance of planning entry
-     * @param strPlanningEntryType
+     * a factory method for generating an instance of Flight Schedule
      * @param location
      * @param timeSlot
-     * @return a empty instance of planning entry
+     * @return a empty instance of planning entry of Flight Schedule
      */
-    public static <R> PlanningEntry<R> newPlanningEntry(String strPlanningEntryType, Location location,
-            TimeSlot timeSlot) {
-        if (strPlanningEntryType.equals("FlightSchedule")) {
-            return new FlightSchedule<R>(location, timeSlot);
-        }
-        //TrainSchedule
-        //ActivityCalendar
-        return null;
+    public static <R> FlightSchedule<R> newPlanningEntryOfFlightSchedule(Location location, TimeSlot timeSlot) {
+        return new FlightSchedule<R>(location, timeSlot);
     }
 
-    public Boolean allocateResource(R resource);
+    /**
+     * a factory method for generating an instance of Train Schedule
+     * @param location
+     * @param timeSlot
+     * @return a empty instance of planning entry of Train Schedule
+     */
+    public static <R> TrainSchedule<R> newPlanningEntryOfTrainSchedule(Location location, TimeSlot timeSlot) {
+        return new TrainSchedule<R>(location, timeSlot);
+    }
+
+    /**
+     * a factory method for generating an instance of Activity Calendar
+     * @param location
+     * @param timeSlot
+     * @return a empty instance of planning entry of Activity Calendar
+     */
+    public static <R> ActivityCalendar<R> newPlanningEntryOfActivityCalendar(Location location, TimeSlot timeSlot) {
+        return new ActivityCalendar<R>(location, timeSlot);
+    }
 
     public Boolean start();
+
+    public Boolean block();
 
     public Boolean cancel();
 
     public Boolean finish();
-
-    public R getResource();
 
     public Location getLocation();
 

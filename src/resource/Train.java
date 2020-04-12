@@ -1,14 +1,16 @@
 package resource;
 
+import java.util.Objects;
+
 /**
  * immutable object
  */
 public class Train implements Resource {
     private final String trainNumber;
     private final String trainType;
-    private final String trainCapacity;
+    private final int trainCapacity;
 
-    public Train(String trainNumber, String trainType, String trainCapacity) {
+    public Train(String trainNumber, String trainType, int trainCapacity) {
         this.trainNumber = trainNumber;
         this.trainType = trainType;
         this.trainCapacity = trainCapacity;
@@ -22,7 +24,7 @@ public class Train implements Resource {
         return this.trainType;
     }
 
-    public String getTrainCapacity() {
+    public int getTrainCapacity() {
         return this.trainCapacity;
     }
 
@@ -35,7 +37,7 @@ public class Train implements Resource {
         }
         Train train = (Train) o;
         return Objects.equals(trainNumber, train.trainNumber) && Objects.equals(trainType, train.trainType)
-                && Objects.equals(trainCapacity, train.trainCapacity);
+                && trainCapacity == train.trainCapacity;
     }
 
     @Override
@@ -48,4 +50,5 @@ public class Train implements Resource {
         return "{" + " trainNumber='" + getTrainNumber() + "'" + ", trainType='" + getTrainType() + "'"
                 + ", trainCapacity='" + getTrainCapacity() + "'" + "}";
     }
+
 }

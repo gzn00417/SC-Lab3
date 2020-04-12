@@ -1,31 +1,32 @@
 package resource;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * immutable object
  */
 public class Document implements Resource {
     private final String docName;
-    private final String publicDepartment;
-    private final LocalDate publicDate;
+    private final String publishDepartment;
+    private final LocalDate publishDate;
 
-    public Document(String docName, String publicDepartment, LocalDate publicDate) {
+    public Document(String docName, String publishDepartment, LocalDate publishDate) {
         this.docName = docName;
-        this.publicDepartment = publicDepartment;
-        this.publicDate = publicDate;
+        this.publishDepartment = publishDepartment;
+        this.publishDate = publishDate;
     }
 
     public String getDocName() {
         return this.docName;
     }
 
-    public String getPublicDepartment() {
-        return this.publicDepartment;
+    public String getPublishDepartment() {
+        return this.publishDepartment;
     }
 
-    public LocalDate getPublicDate() {
-        return this.publicDate;
+    public LocalDate getPublishDate() {
+        return this.publishDate;
     }
 
     @Override
@@ -36,18 +37,20 @@ public class Document implements Resource {
             return false;
         }
         Document document = (Document) o;
-        return Objects.equals(docName, document.docName) && Objects.equals(publicDepartment, document.publicDepartment)
-                && Objects.equals(publicDate, document.publicDate);
+        return Objects.equals(docName, document.docName)
+                && Objects.equals(publishDepartment, document.publishDepartment)
+                && Objects.equals(publishDate, document.publishDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(docName, publicDepartment, publicDate);
+        return Objects.hash(docName, publishDepartment, publishDate);
     }
 
     @Override
     public String toString() {
-        return "{" + " docName='" + getDocName() + "'" + ", publicDepartment='" + getPublicDepartment() + "'"
-                + ", publicDate='" + getPublicDate() + "'" + "}";
+        return "{" + " docName='" + getDocName() + "'" + ", publishDepartment='" + getPublishDepartment() + "'"
+                + ", publishDate='" + getPublishDate() + "'" + "}";
     }
+
 }
