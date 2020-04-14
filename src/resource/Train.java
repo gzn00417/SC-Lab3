@@ -10,20 +10,38 @@ public class Train implements Resource {
     private final String trainType;
     private final int trainCapacity;
 
+    /**
+     * constructor
+     * @param trainNumber
+     * @param trainType
+     * @param trainCapacity
+     */
     public Train(String trainNumber, String trainType, int trainCapacity) {
         this.trainNumber = trainNumber;
         this.trainType = trainType;
         this.trainCapacity = trainCapacity;
     }
 
+    /**
+     * get the String of train number
+     * @return the String of train number
+     */
     public String getTrainNumber() {
         return this.trainNumber;
     }
 
+    /**
+     * get the String of train type
+     * @return the String of train type
+     */
     public String getTrainType() {
         return this.trainType;
     }
 
+    /**
+     * get the int of train capacity
+     * @return the int of train capacity
+     */
     public int getTrainCapacity() {
         return this.trainCapacity;
     }

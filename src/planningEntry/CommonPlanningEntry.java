@@ -14,6 +14,12 @@ public abstract class CommonPlanningEntry<R> implements PlanningEntry<R> {
     protected String strPlanningEntryType;
     protected String planningEntryNumber;
 
+    /**
+     * constructor
+     * @param location
+     * @param timeSlot
+     * @param planningEntryNumber
+     */
     public CommonPlanningEntry(Location location, TimeSlot timeSlot, String planningEntryNumber) {
         this.location = location;
         this.timeSlot = timeSlot;

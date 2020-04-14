@@ -1,7 +1,5 @@
 package resource;
 
-import java.time.LocalDate;
-
 /**
  * an interface represents types of resources
  */
@@ -33,11 +31,11 @@ public interface Resource {
     /**
      * generate a new resource of document
      * @param docName
-     * @param publishDepartment
-     * @param publishDate
-     * @return a new instance of document
+     * @param strPublishDepartment
+     * @param strPublishDate
+     * @return a new resource of document
      */
-    public static Document newResourceOfDocument(String docName, String publishDepartment, LocalDate publishDate) {
-        return new Document(docName, publishDepartment, publishDate);
+    public static Document newResourceOfDocument(String docName, String strPublishDepartment, String strPublishDate) {
+        return new Document(docName, strPublishDepartment, strPublishDate);
     }
 }

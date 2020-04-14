@@ -21,11 +21,29 @@ public class Location {
      * do not provide mutator
      */
 
+    /**
+     * constructor
+     * @param locations
+     */
     public Location(String... locations) {
         for (String str : locations)
             this.locations.add(str);
+        checkRep();
     }
 
+    /**
+     * check Rep
+     */
+    private void checkRep() {
+        for (String strLocation : locations) {
+            assert (strLocation.length() > 0);
+        }
+    }
+
+    /**
+     * get the List of String of location
+     * @return the List of String of location
+     */
     public List<String> getLocations() {
         return this.locations;
     }

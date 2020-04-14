@@ -21,23 +21,49 @@ public class TimeSlot {
      * RI:
      * the length of arrival and leaving should be equal
      * leaving[i] should be later than arrival[i]
-     * when i<=length arrival[i] and leaving[i] should be non-null
+     * when i<length arrival[i] and leaving[i] should be non-null
      * 
      * Safety:
      * do not provide mutator
      */
 
+    /**
+     * constructor
+     * @param arrival
+     * @param leaving
+     */
     public TimeSlot(List<String> arrival, List<String> leaving) {
         for (String strDateTime : arrival)
             this.arrival.add(LocalDateTime.parse(strDateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         for (String strDateTime : leaving)
             this.leaving.add(LocalDateTime.parse(strDateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        checkRep();
     }
 
+    /**
+     * check Rep
+     */
+    private void checkRep() {
+        assert (arrival.size() == leaving.size());
+        for (int i = 0; i < arrival.size(); i++) {
+            assert (arrival.get(i) != null);
+            assert (leaving.get(i) != null);
+            assert (arrival.get(i).isAfter(leaving.get(i)));
+        }
+    }
+
+    /**
+     * get the list of LocalDateTime of arrival
+     * @return the list of LocalDateTime
+     */
     public List<LocalDateTime> getArrival() {
         return this.arrival;
     }
 
+    /**
+     * get the list of LocalDateTime of leaving
+     * @return the list of LocalDateTime
+     */
     public List<LocalDateTime> getLeaving() {
         return this.leaving;
     }

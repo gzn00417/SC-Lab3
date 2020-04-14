@@ -12,6 +12,13 @@ public class Plane implements Resource {
     private final int intSeats;
     private final double age;
 
+    /**
+     * constructor
+     * @param number
+     * @param strType
+     * @param intSeats
+     * @param age
+     */
     public Plane(String number, String strType, int intSeats, double age) {
         this.number = number;
         this.strType = strType;
@@ -19,18 +26,34 @@ public class Plane implements Resource {
         this.age = age;
     }
 
+    /**
+     * get the String of plane number
+     * @return the String of plane number
+     */
     public String getNumber() {
         return this.number;
     }
 
+    /**
+     * get the String of plane type
+     * @return the String of plane type
+     */
     public String getStrType() {
         return this.strType;
     }
 
+    /**
+     * get the int of total seats amount
+     * @return the int of total seats amount
+     */
     public int getIntSeats() {
         return this.intSeats;
     }
 
+    /**
+     * get the double of plane age
+     * @return the double of plane age
+     */
     public double getAge() {
         return this.age;
     }
