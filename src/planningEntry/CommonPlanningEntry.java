@@ -2,7 +2,6 @@ package planningEntry;
 
 import entryState.*;
 import location.*;
-import resource.*;
 import timeSlot.*;
 
 /**
@@ -13,10 +12,12 @@ public abstract class CommonPlanningEntry<R> implements PlanningEntry<R> {
     protected TimeSlot timeSlot;
     protected EntryState state;
     protected String strPlanningEntryType;
+    protected String planningEntryNumber;
 
-    public CommonPlanningEntry(Location location, TimeSlot timeSlot) {
+    public CommonPlanningEntry(Location location, TimeSlot timeSlot, String planningEntryNumber) {
         this.location = location;
         this.timeSlot = timeSlot;
+        this.planningEntryNumber = planningEntryNumber;
         state = new EntryState("Waiting");
     }
 
@@ -57,7 +58,18 @@ public abstract class CommonPlanningEntry<R> implements PlanningEntry<R> {
 
     @Override
     public String getStrPlanningEntryType() {
-        return strPlanningEntryType;
+        return this.strPlanningEntryType;
     }
+
+    @Override
+    public String getPlanningEntryNumber() {
+        return this.planningEntryNumber;
+    }
+
+    /**
+     * get the planning date
+     * @return string of planning date
+     */
+    public abstract String getPlanningDate();
 
 }

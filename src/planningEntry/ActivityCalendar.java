@@ -11,8 +11,8 @@ public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
     private R oneResource;
     private int intResourceNumber;
 
-    public ActivityCalendar(Location location, TimeSlot timeSlot) {
-        super(location, timeSlot);
+    public ActivityCalendar(Location location, TimeSlot timeSlot, String planningEntryNumber) {
+        super(location, timeSlot, planningEntryNumber);
         this.strPlanningEntryType = "ActivityCalendar";
         System.out.println("ActivityCalendar");
     }
@@ -45,5 +45,10 @@ public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
 
     public void setNewLocation(String strNewLocation) {
         this.location = new Location(strNewLocation);
+    }
+
+    @Override
+    public String getPlanningDate() {
+        return this.getStrBeginningTime().substring(0, 10);
     }
 }

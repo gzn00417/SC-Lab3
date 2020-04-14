@@ -12,30 +12,36 @@ public interface PlanningEntry<R> {
      * a factory method for generating an instance of Flight Schedule
      * @param location
      * @param timeSlot
+     * @param planningEntryNumber
      * @return a empty instance of planning entry of Flight Schedule
      */
-    public static <R> FlightSchedule<R> newPlanningEntryOfFlightSchedule(Location location, TimeSlot timeSlot) {
-        return new FlightSchedule<R>(location, timeSlot);
+    public static <R> FlightSchedule<R> newPlanningEntryOfFlightSchedule(Location location, TimeSlot timeSlot,
+            String planningEntryNumber) {
+        return new FlightSchedule<R>(location, timeSlot, planningEntryNumber);
     }
 
     /**
      * a factory method for generating an instance of Train Schedule
      * @param location
      * @param timeSlot
+     * @param planningEntryNumber
      * @return a empty instance of planning entry of Train Schedule
      */
-    public static <R> TrainSchedule<R> newPlanningEntryOfTrainSchedule(Location location, TimeSlot timeSlot) {
-        return new TrainSchedule<R>(location, timeSlot);
+    public static <R> TrainSchedule<R> newPlanningEntryOfTrainSchedule(Location location, TimeSlot timeSlot,
+            String planningEntryNumber) {
+        return new TrainSchedule<R>(location, timeSlot, planningEntryNumber);
     }
 
     /**
      * a factory method for generating an instance of Activity Calendar
      * @param location
      * @param timeSlot
+     * @param planningEntryNumber
      * @return a empty instance of planning entry of Activity Calendar
      */
-    public static <R> ActivityCalendar<R> newPlanningEntryOfActivityCalendar(Location location, TimeSlot timeSlot) {
-        return new ActivityCalendar<R>(location, timeSlot);
+    public static <R> ActivityCalendar<R> newPlanningEntryOfActivityCalendar(Location location, TimeSlot timeSlot,
+            String planningEntryNumber) {
+        return new ActivityCalendar<R>(location, timeSlot, planningEntryNumber);
     }
 
     public Boolean start();
@@ -54,4 +60,5 @@ public interface PlanningEntry<R> {
 
     public String getStrPlanningEntryType();
 
+    public String getPlanningEntryNumber();
 }

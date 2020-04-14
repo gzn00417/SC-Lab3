@@ -13,8 +13,8 @@ import timeSlot.*;
 public class TrainSchedule<R> extends CommonPlanningEntry<R> {
     private final List<R> resources = new ArrayList<>();
 
-    public TrainSchedule(Location location, TimeSlot timeSlot) {
-        super(location, timeSlot);
+    public TrainSchedule(Location location, TimeSlot timeSlot, String planningEntryNumber) {
+        super(location, timeSlot, planningEntryNumber);
         this.strPlanningEntryType = "TrainSchedule";
         System.out.println("TrainSchedule");
     }
@@ -40,5 +40,10 @@ public class TrainSchedule<R> extends CommonPlanningEntry<R> {
     public String getArrivalTimeOfIndex(int index) {
         assert (index != 0);
         return super.getTimeSlot().getArrival().get(index).toString();
+    }
+
+    @Override
+    public String getPlanningDate() {
+        return this.getLeavingTimeOfIndex(0).substring(0, 10);
     }
 }

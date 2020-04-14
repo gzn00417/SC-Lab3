@@ -23,7 +23,8 @@ public class PlanningEntryTest {
                 Arrays.asList("2020-01-01 10:00", "2020-02-02 12:00"));
 
         // run a plan
-        FlightSchedule<Plane> planningEntry = PlanningEntry.newPlanningEntryOfFlightSchedule(location, timeSlot);
+        FlightSchedule<Plane> planningEntry = PlanningEntry.newPlanningEntryOfFlightSchedule(location, timeSlot,
+                "CA001");
         assertEquals("WAITING", planningEntry.getState().getStrState());
         assertTrue(planningEntry.allocateResource(plane));
         assertEquals("ALLOCATED", planningEntry.getState().getStrState());
@@ -35,7 +36,8 @@ public class PlanningEntryTest {
         assertEquals("ENDED", planningEntry.getState().getStrState());
 
         // cancel a plan
-        FlightSchedule<Plane> planningEntry_ = PlanningEntry.newPlanningEntryOfFlightSchedule(location, timeSlot);
+        FlightSchedule<Plane> planningEntry_ = PlanningEntry.newPlanningEntryOfFlightSchedule(location, timeSlot,
+                "CA001");
         assertTrue(planningEntry_.allocateResource(plane));
         assertEquals("ALLOCATED", planningEntry_.getState().getStrState());
         assertTrue(planningEntry_.cancel());

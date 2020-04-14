@@ -1,6 +1,13 @@
 package planningEntryCollection;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import location.*;
 import planningEntry.*;
+import resource.*;
 
 /**
  * planning entry collection is used to:
@@ -11,38 +18,75 @@ import planningEntry.*;
  * present all the plan that one chosen resource has been used (Waiting, Running, Ended)
  * show the board
  */
-public abstract class PlanningEntryCollection<R> {
+public abstract class PlanningEntryCollection {
+    protected List<PlanningEntry<Resource>> planningEntries = new ArrayList<>();
+    protected Set<Resource> collectionResource = new HashSet<>();
+    protected Set<Location> collectionLocation = new HashSet<>();
+
     /**
      * generate an instance of planning entry
+     * @param stringInfo the input string array of planning entry information
      * @return a new instance
      */
-    public abstract PlanningEntry<R> newPlanningEntry();
+    public abstract PlanningEntry<Resource> addPlanningEntry(String[] stringInfo);
+
+    /**
+     * search for a planning entry whose number matches the given
+     * @param planningEntryNumber
+     * @return the planning entry
+     */
+    public PlanningEntry<Resource> getPlanningEntryByStrNumber(String planningEntryNumber) {
+        for (PlanningEntry<Resource> planningEntry : planningEntries)
+            if (planningEntry.getPlanningEntryNumber().equals(planningEntryNumber))
+                return planningEntry;
+        return null;
+    }
 
     /**
      * cancel a plan
      * @param planningEntry
      * @return true if cancelled successfully
      */
-    public Boolean cannelPlanningEntry(PlanningEntry<R> planningEntry) {
-        return planningEntry.cancel();
+    public Boolean cannelPlanningEntry(String planningEntryNumber) {
+        PlanningEntry<Resource> planningEntry = this.getPlanningEntryByStrNumber(planningEntryNumber);
+        return planningEntry == null ? false : planningEntry.cancel();
     }
 
     /**
      * allocate one plan available resource
-     * @param planningEntry
-     * @return true if allocate successfully
+     * @param planningEntryNumber
+     * @param stringInfo the input string array containing resource
+     * @return the resource allocated
      */
-    public abstract Boolean allocatePlanningEntry(PlanningEntry<R> planningEntry);
+    public abstract Resource allocatePlanningEntry(String planningEntryNumber, String[] stringInfo);
 
-    public Boolean startPlanningEntry(PlanningEntry<R> planningEntry) {
-        return planningEntry.start();
+    /**
+     * start the planning entry
+     * @param planningEntryNumber
+     * @return true if the start is successful
+     */
+    public Boolean startPlanningEntry(String planningEntryNumber) {
+        PlanningEntry<Resource> planningEntry = this.getPlanningEntryByStrNumber(planningEntryNumber);
+        return planningEntry == null ? false : planningEntry.start();
     }
 
-    public Boolean blockPlanningEntry(PlanningEntry<R> planningEntry) {
-        return planningEntry.block();
+    /**
+     * block the planning entry
+     * @param planningEntryNumber
+     * @return true if it is blocked
+     */
+    public Boolean blockPlanningEntry(String planningEntryNumber) {
+        PlanningEntry<Resource> planningEntry = this.getPlanningEntryByStrNumber(planningEntryNumber);
+        return planningEntry == null ? false : planningEntry.block();
     }
 
-    public Boolean finishPlanningEntry(PlanningEntry<R> planningEntry) {
-        return planningEntry.finish();
+    /**
+     * finish the planning entry
+     * @param planningEntryNumber
+     * @return true if the planning entry is ended
+     */
+    public Boolean finishPlanningEntry(String planningEntryNumber) {
+        PlanningEntry<Resource> planningEntry = this.getPlanningEntryByStrNumber(planningEntryNumber);
+        return planningEntry == null ? false : planningEntry.finish();
     }
 }
