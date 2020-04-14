@@ -48,7 +48,7 @@ public class TimeSlot {
         for (int i = 0; i < arrival.size(); i++) {
             assert (arrival.get(i) != null);
             assert (leaving.get(i) != null);
-            assert (arrival.get(i).isAfter(leaving.get(i)));
+            assert (arrival.get(i).isEqual(leaving.get(i)) || arrival.get(i).isBefore(leaving.get(i)));
         }
     }
 

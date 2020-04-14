@@ -13,15 +13,25 @@ public class EntryState {
 
     public EntryState(String stateName) {
         this.state = EntryStateEnum.valueOf(stateName.toUpperCase());
+        checkRep();
+    }
+
+    /**
+     * check Rep
+     */
+    private void checkRep() {
+        assert (state != null);
     }
 
     /**
      * set the new state
-     * @param strPlanningEntryType
+     * @param strPlanningEntryType in {"FlightSchedule", "TrainSchedule", "ActivityCalendar"}
      * @param strNewState
      * @return true if the setting is successful, false if not
      */
     public Boolean setNewState(String strPlanningEntryType, String strNewState) {
+        assert (strPlanningEntryType.toLowerCase().contains("train")
+                || !this.getStrState().toLowerCase().equals("blocked"));
         if (this.setAvailability(strPlanningEntryType, strNewState.toUpperCase())) {
             this.state = EntryStateEnum.valueOf(strNewState.toUpperCase());
             return true;
@@ -31,7 +41,7 @@ public class EntryState {
 
     /**
      * judge whether this state can be transferred to the new state
-     * @param strPlanningEntryType
+     * @param strPlanningEntryType in {"FlightSchedule", "TrainSchedule", "ActivityCalendar"}
      * @param strNewState
      * @return true if the current state can be transferred to the new state, false if not
      */

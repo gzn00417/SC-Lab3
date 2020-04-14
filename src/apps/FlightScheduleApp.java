@@ -21,7 +21,7 @@ public class FlightScheduleApp {
 			cntLine++;
 			if (cntLine >= 13) {
 				FlightSchedule<Resource> flightSchedule = flightScheduleCollection.addPlanningEntry(stringInfo);
-				flightScheduleCollection.allocatePlanningEntry(flightSchedule, stringInfo);
+				flightScheduleCollection.allocatePlanningEntry(flightSchedule.getPlanningEntryNumber(), stringInfo);
 				cntLine = 0;
 			}
 		}
