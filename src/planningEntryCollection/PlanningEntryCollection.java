@@ -28,7 +28,7 @@ public abstract class PlanningEntryCollection {
      * @param stringInfo the input string array of planning entry information
      * @return a new instance
      */
-    public abstract PlanningEntry<Resource> addPlanningEntry(String[] stringInfo);
+    public abstract PlanningEntry<Resource> addPlanningEntry(String stringInfo);
 
     /**
      * search for a planning entry whose number matches the given
@@ -58,7 +58,7 @@ public abstract class PlanningEntryCollection {
      * @param stringInfo the input string array containing resource
      * @return the resource allocated
      */
-    public abstract Resource allocatePlanningEntry(String planningEntryNumber, String[] stringInfo);
+    public abstract Resource allocatePlanningEntry(String planningEntryNumber, String stringInfo);
 
     /**
      * start the planning entry
