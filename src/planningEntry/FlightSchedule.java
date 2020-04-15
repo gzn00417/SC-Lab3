@@ -1,5 +1,8 @@
 package planningEntry;
 
+import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import location.*;
@@ -65,24 +68,25 @@ public class FlightSchedule<R> extends CommonPlanningEntry<R> {
     }
 
     /**
-     * get the String of leaving time
-     * @return the String of leaving time
+     * get the LocalDateTime of leaving time
+     * @return the LocalDateTime of leaving time
      */
-    public String getTimeLeaving() {
-        return super.getTimeSlot().getLeaving().get(ORIGIN).toString();
+    public LocalDateTime getTimeLeaving() {
+        return super.getTimeSlot().getLeaving().get(ORIGIN);
     }
 
     /**
-     * get the String of arrival time
-     * @return the String of arrival time
+     * get the LocalDateTime of arrival time
+     * @return the LocalDateTime of arrival time
      */
-    public String getTimeArrival() {
-        return super.getTimeSlot().getLeaving().get(TERMINAL).toString();
+    public LocalDateTime getTimeArrival() {
+        return super.getTimeSlot().getLeaving().get(TERMINAL);
     }
 
     @Override
-    public String getPlanningDate() {
-        return this.getTimeLeaving().substring(0, 10);
+    public LocalDate getPlanningDate() {
+        return LocalDate.parse(this.getTimeLeaving().toString().substring(0, 10),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     @Override

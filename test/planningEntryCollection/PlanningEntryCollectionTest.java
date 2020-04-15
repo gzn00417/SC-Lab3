@@ -15,10 +15,10 @@ public class PlanningEntryCollectionTest {
         FlightSchedule<Resource> flightSchedule = flightScheduleCollection.addPlanningEntry(input);
         assertEquals("Hongkong", flightSchedule.getLocationOrigin());
         assertEquals("Shenyang", flightSchedule.getLocationTerminal());
-        assertEquals("2020-01-16T22:40", flightSchedule.getTimeLeaving());
-        assertEquals("2020-01-17T03:51", flightSchedule.getTimeArrival());
+        assertEquals("2020-01-16T22:40", flightSchedule.getTimeLeaving().toString());
+        assertEquals("2020-01-17T03:51", flightSchedule.getTimeArrival().toString());
         assertEquals("AA018", flightSchedule.getPlanningEntryNumber());
         assertEquals(new Plane("B6967", "A340", 332, 23.7), flightScheduleCollection.allocatePlanningEntry("AA018", input));
-        assertEquals("2020-01-16", flightSchedule.getPlanningDate());
+        assertEquals("2020-01-16", flightSchedule.getPlanningDate().toString());
     }
 }

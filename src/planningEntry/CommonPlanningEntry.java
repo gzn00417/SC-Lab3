@@ -1,5 +1,7 @@
 package planningEntry;
 
+import java.time.LocalDate;
+
 import entryState.*;
 import location.*;
 import timeSlot.*;
@@ -74,8 +76,8 @@ public abstract class CommonPlanningEntry<R> implements PlanningEntry<R> {
 
     /**
      * get the planning date
-     * @return string of planning date
+     * @return LocalDateTime of planning date
      */
-    public abstract String getPlanningDate();
+    public abstract LocalDate getPlanningDate();
 
 }

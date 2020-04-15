@@ -1,5 +1,9 @@
 package planningEntry;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import location.*;
 import timeSlot.*;
 
@@ -54,19 +58,19 @@ public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
     }
 
     /**
-     * get the String of beginning time
-     * @return the String of beginning time
+     * get the LocalDateTime of beginning time
+     * @return the LocalDateTime of beginning time
      */
-    public String getStrBeginningTime() {
-        return super.getTimeSlot().getLeaving().get(CONST_INDEX).toString();
+    public LocalDateTime getStrBeginningTime() {
+        return super.getTimeSlot().getLeaving().get(CONST_INDEX);
     }
 
     /**
-     * get the String of ending time
-     * @return the String of ending time
+     * get the LocalDateTime of ending time
+     * @return the LocalDateTime of ending time
      */
-    public String getStrEndingTime() {
-        return super.getTimeSlot().getArrival().get(CONST_INDEX).toString();
+    public LocalDateTime getStrEndingTime() {
+        return super.getTimeSlot().getArrival().get(CONST_INDEX);
     }
 
     /**
@@ -94,7 +98,8 @@ public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
     }
 
     @Override
-    public String getPlanningDate() {
-        return this.getStrBeginningTime().substring(0, 10);
+    public LocalDate getPlanningDate() {
+        return LocalDate.parse(this.getStrBeginningTime().toString().substring(0, 10),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 }

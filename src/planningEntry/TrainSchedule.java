@@ -1,5 +1,8 @@
 package planningEntry;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -58,27 +61,28 @@ public class TrainSchedule<R> extends CommonPlanningEntry<R> {
     }
 
     /**
-     * get the String of leaving time of No.indexLocation Location
+     * get the LocalDateTime of leaving time of No.indexLocation Location
      * @param indexLocation
-     * @return the String of leaving time of No.indexLocation Location
+     * @return the LocalDateTime of leaving time of No.indexLocation Location
      */
-    public String getLeavingTimeOfIndex(int indexLocation) {
+    public LocalDateTime getLeavingTimeOfIndex(int indexLocation) {
         assert (indexLocation != super.getTimeSlot().getLeaving().size() - 1);
-        return super.getTimeSlot().getLeaving().get(indexLocation).toString();
+        return super.getTimeSlot().getLeaving().get(indexLocation);
     }
 
     /**
-     * get the String of arrival time of No.indexLocation Location
+     * get the LocalDateTime of arrival time of No.indexLocation Location
      * @param indexLocation
-     * @return the String of arrival time of No.indexLocation Location
+     * @return the LocalDateTime of arrival time of No.indexLocation Location
      */
-    public String getArrivalTimeOfIndex(int indexLocation) {
+    public LocalDateTime getArrivalTimeOfIndex(int indexLocation) {
         assert (indexLocation != 0);
-        return super.getTimeSlot().getArrival().get(indexLocation).toString();
+        return super.getTimeSlot().getArrival().get(indexLocation);
     }
 
     @Override
-    public String getPlanningDate() {
-        return this.getLeavingTimeOfIndex(0).substring(0, 10);
+    public LocalDate getPlanningDate() {
+        return LocalDate.parse(this.getLeavingTimeOfIndex(0).toString().substring(0, 10),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 }
