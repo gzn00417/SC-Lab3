@@ -11,11 +11,6 @@ public class PlanningEntryCollectionTest {
     @Test
     public void testFlightScheduleCollection() {
         FlightScheduleCollection flightScheduleCollection = new FlightScheduleCollection();
-        /*
-        String[] input = { "Flight:2020-01-16,AA018", "{", "DepartureAirport:Hongkong", "ArrivalAirport:Shenyang",
-                "DepatureTime:2020-01-16 22:40", "ArrivalTime:2020-01-17 03:51", "Plane:B6967", "{", "Type:A340",
-                "Seats:332", "Age:23.7", "}", "}" };
-        */
         String input = "Flight:2020-01-16,AA018\n{\nDepartureAirport:Hongkong\nArrivalAirport:Shenyang\nDepatureTime:2020-01-16 22:40\nArrivalTime:2020-01-17 03:51\nPlane:B6967\n{\nType:A340\nSeats:332\nAge:23.7\n}\n}\n";
         FlightSchedule<Resource> flightSchedule = flightScheduleCollection.addPlanningEntry(input);
         assertEquals("Hongkong", flightSchedule.getLocationOrigin());

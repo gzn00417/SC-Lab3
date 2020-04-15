@@ -89,4 +89,29 @@ public abstract class PlanningEntryCollection {
         PlanningEntry<Resource> planningEntry = this.getPlanningEntryByStrNumber(planningEntryNumber);
         return planningEntry == null ? false : planningEntry.finish();
     }
+
+    /**
+     * get the list of planning entries
+     * @return the list of planning entries
+     */
+    public List<PlanningEntry<Resource>> getAllPlanningEntries() {
+        return this.planningEntries;
+    }
+
+    /**
+     * get the set of resources
+     * @return the set of resources
+     */
+    public Set<Resource> getAllResource() {
+        return this.collectionResource;
+    }
+
+    /**
+     * get the set of locations
+     * @return the set of locations
+     */
+    public Set<Location> getAllLocation() {
+        return this.collectionLocation;
+    }
+
 }
