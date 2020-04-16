@@ -22,13 +22,18 @@ public class FlightScheduleCollection extends PlanningEntryCollection {
         String arrivalAirport = matcher.group(4);
         String departureTime = matcher.group(5);
         String arrivalTime = matcher.group(6);
+        return this.addPlanningEntry(planningEntryNumber, departureAirport, arrivalAirport, departureTime, arrivalTime);
+    }
+
+    public FlightSchedule<Resource> addPlanningEntry(String planningEntryNumber, String departureAirport,
+            String arrivalAirport, String departureTime, String arrivalTime) {
         Location location = new Location(departureAirport, arrivalAirport);
         TimeSlot timeSlot = new TimeSlot(Arrays.asList(departureTime, arrivalTime),
                 Arrays.asList(departureTime, arrivalTime));
+        this.collectionLocation.add(location);
         PlanningEntry<Resource> flightSchedule = PlanningEntry.newPlanningEntryOfFlightSchedule(location, timeSlot,
                 planningEntryNumber);
         this.planningEntries.add(flightSchedule);
-        this.collectionLocation.add(location);
         return (FlightSchedule<Resource>) flightSchedule;
     }
 
