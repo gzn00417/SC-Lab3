@@ -34,11 +34,19 @@ public class FlightScheduleApp {
 		mainFrame.add(addPlanningEntryButton);
 		addPlanningEntryButton.addActionListener((e) -> addPlanningEntry());
 		// allocate resource
+		JButton allocateResourceButton = new JButton("Allocate Resource");
+		mainFrame.add(allocateResourceButton);
+		allocateResourceButton.addActionListener((e) -> allocateResource());
 		// ask state
 		// add / delete resources
 		// add / delete locations
 	}
 
+	/**
+	 * read file and add planning entries in txt
+	 * @param strFile
+	 * @throws Exception
+	 */
 	public static void readFile(String strFile) throws Exception {
 		BufferedReader bReader = new BufferedReader(new FileReader(new File(strFile)));
 		String line = "";
@@ -126,8 +134,10 @@ public class FlightScheduleApp {
 			newPanel.add(newText);
 			addPlanningEntryFrame.add(newPanel);
 		}
+		// enter button
 		JButton enterButton = new JButton("Enter");
 		addPlanningEntryFrame.add(enterButton);
+		// do
 		enterButton.addActionListener((e) -> {
 			List<String> gotString = new ArrayList<>();
 			for (int i = 0; i < panelsName.length; i++) {
@@ -136,7 +146,41 @@ public class FlightScheduleApp {
 			flightScheduleCollection.addPlanningEntry(gotString.get(0), gotString.get(1), gotString.get(2),
 					gotString.get(3), gotString.get(4));
 			addPlanningEntryFrame.dispose();
-			JOptionPane.showMessageDialog(addPlanningEntryFrame, "Add Successfully", "Add Planning Entry",
+			JOptionPane.showMessageDialog(addPlanningEntryFrame, "Successfully", "Add Planning Entry",
+					JOptionPane.PLAIN_MESSAGE);
+		});
+	}
+
+	public static void allocateResource() {
+		// frame
+		JFrame allocateResourceFrame = new JFrame("Allocate Plane");
+		allocateResourceFrame.setLayout(new GridLayout(3, 1));
+		allocateResourceFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		allocateResourceFrame.setVisible(true);
+		allocateResourceFrame.setSize(600, 200);
+		// planning entry number
+		JPanel planningEntryNumberPanel = new JPanel();
+		planningEntryNumberPanel.setLayout(new FlowLayout());
+		planningEntryNumberPanel.add(new JLabel("Planning Entry Number:"));
+		JTextField planningEntryNumberText = new JTextField(LINE_WIDTH);
+		planningEntryNumberPanel.add(planningEntryNumberText);
+		allocateResourceFrame.add(planningEntryNumberPanel);
+		// resource number
+		JPanel resourceNumberPanel = new JPanel();
+		resourceNumberPanel.setLayout(new FlowLayout());
+		resourceNumberPanel.add(new JLabel("Plane Number:"));
+		JTextField resourceNumberText = new JTextField(LINE_WIDTH);
+		resourceNumberPanel.add(resourceNumberText);
+		allocateResourceFrame.add(resourceNumberPanel);
+		// enter button
+		JButton enterButton = new JButton("Enter");
+		allocateResourceFrame.add(enterButton);
+		//do
+		enterButton.addActionListener((e) -> {
+			String strPlanningEntryNumber = planningEntryNumberText.getText();
+			String strResourceNumber = resourceNumberText.getText();
+			flightScheduleCollection.allocateResource(strPlanningEntryNumber, strResourceNumber);
+			JOptionPane.showMessageDialog(allocateResourceFrame, "Successfully", "Allocate Resource",
 					JOptionPane.PLAIN_MESSAGE);
 		});
 	}
