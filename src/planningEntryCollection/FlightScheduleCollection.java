@@ -39,8 +39,7 @@ public class FlightScheduleCollection extends PlanningEntryCollection {
 
     @Override
     public Resource allocatePlanningEntry(String planningEntryNumber, String stringInfo) {
-        PlanningEntry<Resource> planningEntry = this.getPlanningEntryByStrNumber(planningEntryNumber);
-        if (planningEntry == null)
+        if (this.getPlanningEntryByStrNumber(planningEntryNumber) == null)
             return null;
         Pattern pattern = Pattern.compile(
                 "Flight:(.*?),(.*?)\n\\{\nDepartureAirport:(.*?)\nArrivalAirport:(.*?)\nDepatureTime:(.*?)\nArrivalTime:(.*?)\nPlane:(.*?)\n\\{\nType:(.*?)\nSeats:(.*?)\nAge:(.*?)\n\\}\n\\}\n");
@@ -51,9 +50,28 @@ public class FlightScheduleCollection extends PlanningEntryCollection {
         String strType = matcher.group(8);
         int intSeats = Integer.valueOf(matcher.group(9));
         double age = Double.valueOf(matcher.group(10));
+        return this.allocateResource(planningEntryNumber, number, strType, intSeats, age);
+    }
+
+    public Resource allocateResource(String planningEntryNumber, String number, String strType, int intSeats,
+            double age) {
         Resource plane = Resource.newResourceOfPlane(number, strType, intSeats, age);
-        ((FlightSchedule<Resource>) planningEntry).allocateResource(plane);
         this.collectionResource.add(plane);
+        PlanningEntry<Resource> planningEntry = this.getPlanningEntryByStrNumber(planningEntryNumber);
+        ((FlightSchedule<Resource>) planningEntry).allocateResource(plane);
         return plane;
+    }
+
+    public Resource allocateResource(String planningEntryNumber, String number) {
+        Plane plane = (Plane) this.getPlaneOfNumber(number);
+        return this.allocateResource(planningEntryNumber, number, plane.getStrType(), plane.getIntSeats(),
+                plane.getAge());
+    }
+
+    public Resource getPlaneOfNumber(String number) {
+        for (Resource plane : this.getAllResource())
+            if (((Plane) plane).getNumber().equals(number))
+                return (Plane) plane;
+        return null;
     }
 }
