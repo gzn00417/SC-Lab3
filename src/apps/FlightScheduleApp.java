@@ -17,6 +17,12 @@ public class FlightScheduleApp {
 	private static final FlightScheduleCollection flightScheduleCollection = new FlightScheduleCollection();
 	private static final FlightBoard board = new FlightBoard();
 
+	/**
+	 * initialize planning entry
+	 * set GUI buttons of application
+	 * @param args
+	 * @throws Exception
+	 */
 	public static void main(String[] args) throws Exception {
 		readFile("data/FlightSchedule/FlightSchedule_3.txt");
 		// main
@@ -38,6 +44,9 @@ public class FlightScheduleApp {
 		mainFrame.add(allocateResourceButton);
 		allocateResourceButton.addActionListener((e) -> allocateResource());
 		// ask state
+		JButton askStateButton = new JButton("Ask State");
+		mainFrame.add(askStateButton);
+		askStateButton.addActionListener((e) -> askState());
 		// add / delete resources
 		// add / delete locations
 	}
@@ -67,6 +76,9 @@ public class FlightScheduleApp {
 		bReader.close();
 	}
 
+	/**
+	 * visualization application
+	 */
 	public static void visualization() {
 		// frame
 		JFrame visualizeOptionFrame = new JFrame("Visualization");
@@ -112,6 +124,9 @@ public class FlightScheduleApp {
 		});
 	}
 
+	/**
+	 * add planning entry application
+	 */
 	public static void addPlanningEntry() {
 		// frame
 		JFrame addPlanningEntryFrame = new JFrame("Add Planning Entry");
@@ -148,9 +163,13 @@ public class FlightScheduleApp {
 			addPlanningEntryFrame.dispose();
 			JOptionPane.showMessageDialog(addPlanningEntryFrame, "Successfully", "Add Planning Entry",
 					JOptionPane.PLAIN_MESSAGE);
+			addPlanningEntryFrame.dispose();
 		});
 	}
 
+	/**
+	 * allocate resource to planning entry
+	 */
 	public static void allocateResource() {
 		// frame
 		JFrame allocateResourceFrame = new JFrame("Allocate Plane");
@@ -182,6 +201,38 @@ public class FlightScheduleApp {
 			flightScheduleCollection.allocateResource(strPlanningEntryNumber, strResourceNumber);
 			JOptionPane.showMessageDialog(allocateResourceFrame, "Successfully", "Allocate Resource",
 					JOptionPane.PLAIN_MESSAGE);
+			allocateResourceFrame.dispose();
+		});
+	}
+
+	/**
+	 * ask one planning entry application
+	 */
+	public static void askState() {
+		// frame
+		JFrame askStateFrame = new JFrame("Ask State");
+		askStateFrame.setLayout(new GridLayout(1, 1));
+		askStateFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		askStateFrame.setVisible(true);
+		askStateFrame.setSize(600, 200);
+		// planning entry number
+		JPanel askStatePanel = new JPanel();
+		askStatePanel.setLayout(new FlowLayout());
+		askStatePanel.add(new JLabel("Planning Entry Number:"));
+		JTextField askStateText = new JTextField(LINE_WIDTH);
+		askStatePanel.add(askStateText);
+		JButton askStateButton = new JButton("ASK");
+		askStatePanel.add(askStateButton);
+		askStateFrame.add(askStatePanel);
+		askStateButton.addActionListener((e) -> {
+			String strPlanningEntryNumber = askStateText.getText();
+			FlightSchedule<Resource> flightSchedule = (FlightSchedule<Resource>) flightScheduleCollection
+					.getPlanningEntryByStrNumber(strPlanningEntryNumber);
+			String strState = flightSchedule.getState().getStrState();
+			JOptionPane.showMessageDialog(askStateFrame,
+					"The State of " + strPlanningEntryNumber + " is " + strState + ".", "Ask State",
+					JOptionPane.PLAIN_MESSAGE);
+			askStateFrame.dispose();
 		});
 	}
 }
