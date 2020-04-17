@@ -15,7 +15,6 @@ import resource.*;
 public class FlightScheduleApp {
 	private static final int INPUT_ROWS_PER_UNIT = 13, LINE_WIDTH = 16;
 	private static final FlightScheduleCollection flightScheduleCollection = new FlightScheduleCollection();
-	private static final FlightBoard board = new FlightBoard();
 
 	/**
 	 * initialize planning entry
@@ -112,6 +111,7 @@ public class FlightScheduleApp {
 		visualizeLeavingPanel.add(leavingButton);
 		visualizeOptionFrame.add(visualizeLeavingPanel);
 		// button
+		FlightBoard board = new FlightBoard();
 		arrivalButton.addActionListener((e_) -> {
 			String strCurrentTime = currentTimeText.getText();
 			String strAirport = arrivalAirportText.getText();
