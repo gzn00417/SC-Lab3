@@ -108,10 +108,14 @@ public abstract class PlanningEntryCollection {
 
     /**
      * get the set of locations
-     * @return the set of locations
+     * @return the set of String of locations
      */
-    public Set<Location> getAllLocation() {
-        return this.collectionLocation;
+    public Set<String> getAllLocation() {
+        Set<String> allLocation = new HashSet<>();
+        for (Location lcn : this.collectionLocation) {
+            allLocation.addAll(lcn.getLocations());
+        }
+        return allLocation;
     }
 
 }
