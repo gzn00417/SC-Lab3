@@ -41,11 +41,15 @@ public class FlightScheduleCollection extends PlanningEntryCollection {
     public Resource allocatePlanningEntry(String planningEntryNumber, String stringInfo) {
         if (this.getPlanningEntryByStrNumber(planningEntryNumber) == null)
             return null;
-        Pattern pattern = Pattern.compile(
+        Pattern pattern1 = Pattern.compile(
                 "Flight:(.*?),(.*?)\n\\{\nDepartureAirport:(.*?)\nArrivalAirport:(.*?)\nDepatureTime:(.*?)\nArrivalTime:(.*?)\nPlane:(.*?)\n\\{\nType:(.*?)\nSeats:(.*?)\nAge:(.*?)\n\\}\n\\}\n");
-        Matcher matcher = pattern.matcher(stringInfo);
-        if (!matcher.find())
-            return null;
+        Pattern pattern2 = Pattern.compile("Plane:(.*?)\n\\{\nType:(.*?)\nSeats:(.*?)\nAge:(.*?)\n\\}\n");
+        Matcher matcher = pattern1.matcher(stringInfo);
+        if (!matcher.find()) {
+            matcher = pattern2.matcher(stringInfo);
+            if (!matcher.find())
+                return null;
+        }
         String number = matcher.group(7);
         String strType = matcher.group(8);
         int intSeats = Integer.valueOf(matcher.group(9));

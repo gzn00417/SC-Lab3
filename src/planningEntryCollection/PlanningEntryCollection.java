@@ -55,7 +55,7 @@ public abstract class PlanningEntryCollection {
     /**
      * allocate one plan available resource
      * @param planningEntryNumber
-     * @param stringInfo the input string array containing resource
+     * @param stringInfo the input string array containing resource or whole planning entry
      * @return the resource allocated
      */
     public abstract Resource allocatePlanningEntry(String planningEntryNumber, String stringInfo);
