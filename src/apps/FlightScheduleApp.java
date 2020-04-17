@@ -13,7 +13,14 @@ import planningEntryCollection.*;
 import resource.*;
 
 public class FlightScheduleApp {
-	private static final int INPUT_ROWS_PER_UNIT = 13, LINE_WIDTH = 16;
+	/**
+	 * default flight schedule input rows number in files
+	 */
+	private static final int INPUT_ROWS_PER_UNIT = 13;
+	/**
+	 * default GUI text line width
+	 */
+	private static final int LINE_WIDTH = 16;
 	private static final FlightScheduleCollection flightScheduleCollection = new FlightScheduleCollection();
 
 	/**
@@ -27,9 +34,9 @@ public class FlightScheduleApp {
 		// main
 		JFrame mainFrame = new JFrame("Flight Schedule");
 		mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		mainFrame.setLayout(new GridLayout(2, 3, 10, 5));
+		mainFrame.setLayout(new GridLayout(2, 4, 10, 5));
 		mainFrame.setVisible(true);
-		mainFrame.setSize(500, 400);
+		mainFrame.setSize(800, 300);
 		// visualization
 		JButton visualizeButton = new JButton("Visualize");
 		mainFrame.add(visualizeButton);
@@ -46,8 +53,12 @@ public class FlightScheduleApp {
 		JButton askStateButton = new JButton("Ask State");
 		mainFrame.add(askStateButton);
 		askStateButton.addActionListener((e) -> askState());
-		// add / delete resources
-		// add / delete locations
+		// operate planning entry
+		JButton operatePlanningEntryButton = new JButton("Operate Planning Entry");
+		mainFrame.add(operatePlanningEntryButton);
+		operatePlanningEntryButton.addActionListener((e) -> operatePlanningEntry());
+		// manage resources
+		// manage locations
 	}
 
 	/**
@@ -133,7 +144,7 @@ public class FlightScheduleApp {
 		addPlanningEntryFrame.setLayout(new GridLayout(6, 1));
 		addPlanningEntryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		addPlanningEntryFrame.setVisible(true);
-		addPlanningEntryFrame.setSize(600, 200);
+		addPlanningEntryFrame.setSize(600, 300);
 		// add panels
 		String[] panelsName = new String[] { "Planning Entry Number:", "Departure Airport:", "Arrival Airport:",
 				"Departure Time (yyyy-MM-dd HH:mm):", "Arrival Time (yyyy-MM-dd HH:mm):" };
@@ -221,6 +232,7 @@ public class FlightScheduleApp {
 		askStatePanel.add(new JLabel("Planning Entry Number:"));
 		JTextField askStateText = new JTextField(LINE_WIDTH);
 		askStatePanel.add(askStateText);
+		// button
 		JButton askStateButton = new JButton("ASK");
 		askStatePanel.add(askStateButton);
 		askStateFrame.add(askStatePanel);
@@ -228,11 +240,63 @@ public class FlightScheduleApp {
 			String strPlanningEntryNumber = askStateText.getText();
 			FlightSchedule<Resource> flightSchedule = (FlightSchedule<Resource>) flightScheduleCollection
 					.getPlanningEntryByStrNumber(strPlanningEntryNumber);
-			String strState = flightSchedule.getState().getStrState();
+			String strState = flightSchedule != null ? flightSchedule.getState().getStrState() : "";
 			JOptionPane.showMessageDialog(askStateFrame,
 					"The State of " + strPlanningEntryNumber + " is " + strState + ".", "Ask State",
 					JOptionPane.PLAIN_MESSAGE);
 			askStateFrame.dispose();
+		});
+	}
+
+	/**
+	 * operate a planning entry
+	 * start, cancel, block or finish one planning entry
+	 */
+	public static void operatePlanningEntry() {
+		// frame
+		JFrame operateFrame = new JFrame("Operate Planning Entry");
+		operateFrame.setLayout(new GridLayout(2, 1));
+		operateFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		operateFrame.setVisible(true);
+		operateFrame.setSize(400, 150);
+		// planning entry number
+		JPanel planningEntryNumberPanel = new JPanel();
+		planningEntryNumberPanel.setLayout(new FlowLayout());
+		planningEntryNumberPanel.add(new JLabel("Planning Entry Number:"));
+		JTextField planningEntryNumberText = new JTextField(LINE_WIDTH);
+		planningEntryNumberPanel.add(planningEntryNumberText);
+		operateFrame.add(planningEntryNumberPanel);
+		// setting state
+		JPanel settingPanel = new JPanel();
+		settingPanel.setLayout(new FlowLayout());
+		settingPanel.add(new JLabel("Operation:"));
+		JComboBox<String> operateBox = new JComboBox<>(new String[] { "Start", "Block", "Cancel", "Finish" });
+		settingPanel.add(operateBox);
+		JButton enterButton = new JButton("Enter");
+		settingPanel.add(enterButton);
+		operateFrame.add(settingPanel);
+		// action
+		enterButton.addActionListener((e) -> {
+			String strOperation = (String) operateBox.getSelectedItem();
+			boolean operationFlag;
+			switch (strOperation) {
+				case "Start":
+					operationFlag = flightScheduleCollection.startPlanningEntry(planningEntryNumberText.getText());
+					break;
+				case "Block":
+					operationFlag = flightScheduleCollection.blockPlanningEntry(planningEntryNumberText.getText());
+					break;
+				case "Cancel":
+					operationFlag = flightScheduleCollection.cancelPlanningEntry(planningEntryNumberText.getText());
+					break;
+				case "Finish":
+					operationFlag = flightScheduleCollection.finishPlanningEntry(planningEntryNumberText.getText());
+					break;
+				default:
+					operationFlag = false;
+			}
+			JOptionPane.showMessageDialog(operateFrame, operationFlag ? "Successfully" : "Failed", "Operation State",
+					JOptionPane.PLAIN_MESSAGE);
 		});
 	}
 }
