@@ -47,7 +47,7 @@ public abstract class PlanningEntryCollection {
      * @param planningEntry
      * @return true if cancelled successfully
      */
-    public Boolean cannelPlanningEntry(String planningEntryNumber) {
+    public Boolean cancelPlanningEntry(String planningEntryNumber) {
         PlanningEntry<Resource> planningEntry = this.getPlanningEntryByStrNumber(planningEntryNumber);
         return planningEntry == null ? false : planningEntry.cancel();
     }
