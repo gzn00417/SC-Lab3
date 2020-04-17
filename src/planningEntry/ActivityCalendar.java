@@ -61,7 +61,7 @@ public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
      * get the LocalDateTime of beginning time
      * @return the LocalDateTime of beginning time
      */
-    public LocalDateTime getStrBeginningTime() {
+    public LocalDateTime getBeginningTime() {
         return super.getTimeSlot().getLeaving().get(CONST_INDEX);
     }
 
@@ -69,7 +69,7 @@ public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
      * get the LocalDateTime of ending time
      * @return the LocalDateTime of ending time
      */
-    public LocalDateTime getStrEndingTime() {
+    public LocalDateTime getEndingTime() {
         return super.getTimeSlot().getArrival().get(CONST_INDEX);
     }
 
@@ -99,7 +99,7 @@ public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
 
     @Override
     public LocalDate getPlanningDate() {
-        return LocalDate.parse(this.getStrBeginningTime().toString().substring(0, 10),
+        return LocalDate.parse(this.getBeginningTime().toString().substring(0, 10),
                 DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 }
