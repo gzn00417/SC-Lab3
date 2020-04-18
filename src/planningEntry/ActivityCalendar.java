@@ -16,10 +16,6 @@ public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
      */
     private static final int CONST_INDEX = 0;
     /**
-     * document
-     */
-    private R oneResource;
-    /**
      * the number of resources
      */
     private int intResourceNumber;
@@ -44,7 +40,7 @@ public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
      * @return true if the resource is set and state is ALLOCATED
      */
     public Boolean allocateResource(R resource, int intResourceNumber) {
-        this.oneResource = resource;
+        super.resource = resource;
         this.intResourceNumber = intResourceNumber;
         return this.state.setNewState(strPlanningEntryType, "Allocated");
     }
@@ -71,14 +67,6 @@ public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
      */
     public LocalDateTime getEndingTime() {
         return super.getTimeSlot().getArrival().get(CONST_INDEX);
-    }
-
-    /**
-     * get the Document object
-     * @return the Document object
-     */
-    public R getDocument() {
-        return this.oneResource;
     }
 
     /**

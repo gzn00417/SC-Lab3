@@ -19,7 +19,7 @@ public class TimeSlotTest {
     public void testTimeSlotOfTrainSchedule() {
         String[] leavingStrings = new String[] { "2020-01-01 10:10", "2020-01-01 12:12", "2020-01-01 13:10" };
         String[] arrivalStrings = new String[] { "2020-01-01 10:10", "2020-01-01 12:10", "2020-01-01 13:10" };
-        TimeSlot timeSlot = new TimeSlot(Arrays.asList(arrivalStrings), Arrays.asList(leavingStrings));
+        TimeSlot timeSlot = new TimeSlot(Arrays.asList(leavingStrings), Arrays.asList(arrivalStrings));
         assertEquals("2020-01-01T10:10", timeSlot.getLeaving().get(0).toString());
         assertEquals("2020-01-01T12:12", timeSlot.getLeaving().get(1).toString());
         assertEquals("2020-01-01T13:10", timeSlot.getArrival().get(2).toString());

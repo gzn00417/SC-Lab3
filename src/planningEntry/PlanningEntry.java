@@ -97,4 +97,10 @@ public interface PlanningEntry<R> {
      * @return the String of planning entry number
      */
     public String getPlanningEntryNumber();
+
+    /**
+     * get the R of resource
+     * @return the R of resource
+     */
+    public R getResource();
 }

@@ -15,6 +15,7 @@ public abstract class CommonPlanningEntry<R> implements PlanningEntry<R> {
     protected EntryState state;
     protected String strPlanningEntryType;
     protected String planningEntryNumber;
+    protected R resource;
 
     /**
      * constructor
@@ -72,6 +73,11 @@ public abstract class CommonPlanningEntry<R> implements PlanningEntry<R> {
     @Override
     public String getPlanningEntryNumber() {
         return this.planningEntryNumber;
+    }
+
+    @Override
+    public R getResource() {
+        return this.resource;
     }
 
     /**

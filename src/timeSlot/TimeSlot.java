@@ -18,6 +18,12 @@ public class TimeSlot {
      * arrival[i] represent the time it arrives locations[i]
      * leaving[i] represent the time it leaves locations[i]
      * 
+     * when Flight Schedule:
+     * length == 2, arrival[0] == leaving[0], arrival[1] == leaving[1]
+     * 
+     * when Activity Schedule:
+     * length == 1, arrival[0] is ending time, leaving[0] is beginning time
+     * 
      * RI:
      * the length of arrival and leaving should be equal
      * leaving[i] should be later than arrival[i]
@@ -32,11 +38,11 @@ public class TimeSlot {
      * @param arrival
      * @param leaving
      */
-    public TimeSlot(List<String> arrival, List<String> leaving) {
-        for (String strDateTime : arrival)
-            this.arrival.add(LocalDateTime.parse(strDateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+    public TimeSlot(List<String> leaving, List<String> arrival) {
         for (String strDateTime : leaving)
             this.leaving.add(LocalDateTime.parse(strDateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        for (String strDateTime : arrival)
+            this.arrival.add(LocalDateTime.parse(strDateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         checkRep();
     }
 
@@ -48,7 +54,6 @@ public class TimeSlot {
         for (int i = 0; i < arrival.size(); i++) {
             assert (arrival.get(i) != null);
             assert (leaving.get(i) != null);
-            assert (arrival.get(i).isEqual(leaving.get(i)) || arrival.get(i).isBefore(leaving.get(i)));
         }
     }
 

@@ -16,10 +16,6 @@ public class FlightSchedule<R> extends CommonPlanningEntry<R> {
      * index of origin or terminal in locations
      */
     private static final int ORIGIN = 0, TERMINAL = 1;
-    /**
-     * plane
-     */
-    private R resource;
 
     /**
      * constructor
@@ -39,16 +35,8 @@ public class FlightSchedule<R> extends CommonPlanningEntry<R> {
      * @return true if the resource is set and state is ALLOCATED
      */
     public Boolean allocateResource(R resource) {
-        this.resource = resource;
+        super.resource = resource;
         return this.state.setNewState(strPlanningEntryType, "Allocated");
-    }
-
-    /**
-     * get the Plane object of the flight schedule
-     * @return the R object
-     */
-    public R getPlane() {
-        return this.resource;
     }
 
     /**
