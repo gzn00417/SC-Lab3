@@ -91,13 +91,18 @@ public class PlanningEntryAPIs {
         return false;
     }
 
+    /**
+     * find the closest entry using the same resource with e
+     * @param r
+     * @param e
+     * @param entries
+     * @return the pre entry
+     */
     public static PlanningEntry<Resource> findPreEntryPerResource(Resource r, PlanningEntry<Resource> e,
             List<PlanningEntry<Resource>> entries) {
-        if (checkResourceExclusiveConflict(entries))
-            return null;
         List<PlanningEntry<Resource>> entryList = new ArrayList<>();
         for (int i = 0; i < entries.size(); i++) {
-            if (entries.get(i).getResource().equals(e)) {
+            if (entries.get(i).getResource().equals(e.getResource())) {
                 entryList.add(entries.get(i));
             }
         }
