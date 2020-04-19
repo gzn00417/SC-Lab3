@@ -9,9 +9,6 @@ import java.util.Map;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import location.*;
-import timeSlot.*;
-
 public class PlanningEntryAPIs {
     /**
      * For Activity Calendar

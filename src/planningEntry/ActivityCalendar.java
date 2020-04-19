@@ -29,7 +29,6 @@ public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
     public ActivityCalendar(Location location, TimeSlot timeSlot, String planningEntryNumber) {
         super(location, timeSlot, planningEntryNumber);
         this.strPlanningEntryType = "ActivityCalendar";
-        System.out.println("ActivityCalendar");
     }
 
     /**
