@@ -21,7 +21,7 @@ import resource.*;
 public abstract class PlanningEntryCollection {
     protected List<PlanningEntry<Resource>> planningEntries = new ArrayList<>();
     protected Set<Resource> collectionResource = new HashSet<>();
-    protected Set<Location> collectionLocation = new HashSet<>();
+    protected Set<String> collectionLocation = new HashSet<>();
 
     /**
      * generate an instance of planning entry
@@ -111,11 +111,25 @@ public abstract class PlanningEntryCollection {
      * @return the set of String of locations
      */
     public Set<String> getAllLocation() {
-        Set<String> allLocation = new HashSet<>();
-        for (Location lcn : this.collectionLocation) {
-            allLocation.addAll(lcn.getLocations());
-        }
-        return allLocation;
+        return collectionLocation;
+    }
+
+    /**
+     * delete chosen resource
+     * @param resource
+     * @return true if delete successfully
+     */
+    public boolean deleteResource(Resource resource) {
+        return collectionResource.remove(resource);
+    }
+
+    /**
+     * delete chosen location
+     * @param location
+     * @return true if delete successfully
+     */
+    public boolean deleteLocation(String location) {
+        return collectionLocation.remove(location);
     }
 
 }
