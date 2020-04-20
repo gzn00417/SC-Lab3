@@ -30,7 +30,7 @@ public class FlightScheduleCollection extends PlanningEntryCollection {
         Location location = new Location(departureAirport, arrivalAirport);
         TimeSlot timeSlot = new TimeSlot(Arrays.asList(departureTime, arrivalTime),
                 Arrays.asList(departureTime, arrivalTime));
-        this.collectionLocation.add(location);
+        this.collectionLocation.addAll(location.getLocations());
         PlanningEntry<Resource> flightSchedule = PlanningEntry.newPlanningEntryOfFlightSchedule(location, timeSlot,
                 planningEntryNumber);
         this.planningEntries.add(flightSchedule);
