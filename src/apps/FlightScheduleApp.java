@@ -3,12 +3,15 @@ package apps;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.*;
+
 import java.awt.*;
 
 import board.*;
 import planningEntry.*;
+import planningEntryAPIs.PlanningEntryAPIs;
 import planningEntryCollection.*;
 import resource.*;
 
@@ -30,11 +33,11 @@ public class FlightScheduleApp {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		readFile("data/FlightSchedule/FlightSchedule_3.txt");
+		readFile("data/FlightSchedule/FlightSchedule_5.txt");
 		// main
 		JFrame mainFrame = new JFrame("Flight Schedule");
 		mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		mainFrame.setLayout(new GridLayout(2, 4, 10, 5));
+		mainFrame.setLayout(new GridLayout(3, 3, 10, 5));
 		mainFrame.setVisible(true);
 		mainFrame.setSize(800, 300);
 		// visualization
@@ -53,12 +56,30 @@ public class FlightScheduleApp {
 		JButton askStateButton = new JButton("Ask State");
 		mainFrame.add(askStateButton);
 		askStateButton.addActionListener((e) -> askState());
+		// Title
+		mainFrame.add(new JLabel("Flight\nSchedule"));
 		// operate planning entry
 		JButton operatePlanningEntryButton = new JButton("Operate Planning Entry");
 		mainFrame.add(operatePlanningEntryButton);
 		operatePlanningEntryButton.addActionListener((e) -> operatePlanningEntry());
+		// APIs
+		JButton apisButton = new JButton("APIs");
+		mainFrame.add(apisButton);
+		apisButton.addActionListener((e) -> apis());
+		/*
+		// modify location
+		JButton modifyLocationButton = new JButton("Modify Location");
+		mainFrame.add(modifyLocationButton);
+		modifyLocationButton.addActionListener((e) -> modifyLocation());
+		*/
 		// manage resources
+		JButton resourceButton = new JButton("Manage Resource");
+		mainFrame.add(resourceButton);
+		resourceButton.addActionListener((e) -> manageResource());
 		// manage locations
+		JButton locationButton = new JButton("Manage Location");
+		mainFrame.add(locationButton);
+		locationButton.addActionListener((e) -> manageLocation());
 	}
 
 	/**
@@ -296,6 +317,180 @@ public class FlightScheduleApp {
 					operationFlag = false;
 			}
 			JOptionPane.showMessageDialog(operateFrame, operationFlag ? "Successfully" : "Failed", "Operation State",
+					JOptionPane.PLAIN_MESSAGE);
+		});
+	}
+
+	/**
+	 * 3 operation in PlanningEntryAPIs
+	 */
+	public static void apis() {
+		// frame
+		JFrame apisFrame = new JFrame("APIs");
+		apisFrame.setLayout(new GridLayout(3, 1));
+		apisFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		apisFrame.setVisible(true);
+		apisFrame.setSize(400, 300);
+		// check location conflict
+		JButton checkLocationConflictButton = new JButton("Check Location Conflict");
+		apisFrame.add(checkLocationConflictButton);
+		// check resource conflict
+		JButton checkResourceConflictButton = new JButton("Check Resource Conflict");
+		apisFrame.add(checkResourceConflictButton);
+		// find pre entry
+		JPanel findPreEntryPanel = new JPanel();
+		findPreEntryPanel.setLayout(new FlowLayout());
+		findPreEntryPanel.add(new JLabel("Finding Entry Number:"));
+		JTextField planningEntryNumberText = new JTextField(LINE_WIDTH);
+		findPreEntryPanel.add(planningEntryNumberText);
+		JButton findPreEntryButton = new JButton("Find Pre Entry Per Resource");
+		findPreEntryPanel.add(findPreEntryButton);
+		apisFrame.add(findPreEntryPanel);
+		// do
+		checkLocationConflictButton.addActionListener((e) -> {
+			boolean flag = PlanningEntryAPIs.checkLocationConflict(flightScheduleCollection.getAllPlanningEntries());
+			JOptionPane.showMessageDialog(apisFrame, flag ? "Conflict" : "No Conflict", "Checking Result",
+					JOptionPane.PLAIN_MESSAGE);
+		});
+		checkResourceConflictButton.addActionListener((e) -> {
+			boolean flag = PlanningEntryAPIs
+					.checkResourceExclusiveConflict(flightScheduleCollection.getAllPlanningEntries());
+			JOptionPane.showMessageDialog(apisFrame, flag ? "Conflict" : "No Conflict", "Checking Result",
+					JOptionPane.PLAIN_MESSAGE);
+		});
+		findPreEntryButton.addActionListener((e) -> {
+			String strPlanningEntryNumber = planningEntryNumberText.getText();
+			PlanningEntry<Resource> flightSchedule = flightScheduleCollection
+					.getPlanningEntryByStrNumber(strPlanningEntryNumber);
+			PlanningEntry<Resource> prePlanningEntry = PlanningEntryAPIs.findPreEntryPerResource(
+					flightSchedule.getResource(), flightSchedule, flightScheduleCollection.getAllPlanningEntries());
+			JOptionPane.showMessageDialog(apisFrame, prePlanningEntry.getPlanningEntryNumber(), "Finding Result",
+					JOptionPane.PLAIN_MESSAGE);
+		});
+	}
+
+	/*
+	public static void modifyLocation() {
+		// frame
+		JFrame modifyLocationFrame = new JFrame("Modify Location");
+		modifyLocationFrame.setLayout(new GridLayout(3, 1));
+		modifyLocationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		modifyLocationFrame.setVisible(true);
+		modifyLocationFrame.setSize(400, 300);
+		// planning entry number
+		JPanel planningEntryNumberPanel = new JPanel();
+		planningEntryNumberPanel.setLayout(new FlowLayout());
+		planningEntryNumberPanel.add(new JLabel("Planning Entry Number:"));
+		JTextField planningEntryNumberText = new JTextField(LINE_WIDTH);
+		planningEntryNumberPanel.add(planningEntryNumberText);
+		modifyLocationFrame.add(planningEntryNumberPanel);
+		// locations
+		JPanel locationsPanel = new JPanel();
+		locationsPanel.setLayout(new FlowLayout());
+		locationsPanel.add(new JLabel("Origin:"));
+		JTextField originText = new JTextField(LINE_WIDTH);
+		locationsPanel.add(originText);
+		locationsPanel.add(new JLabel("Terminal:"));
+		JTextField terminalText = new JTextField(LINE_WIDTH);
+		locationsPanel.add(terminalText);
+		modifyLocationFrame.add(locationsPanel);
+		// enter button
+		JButton enterButton = new JButton("Enter");
+		modifyLocationFrame.add(enterButton);
+		// do
+		enterButton.addActionListener((e) -> {
+			String planningEntryNumber = planningEntryNumberText.getText();
+			String origin = originText.getText();
+			if (origin.isBlank())
+				origin = ((FlightSchedule<Resource>) flightScheduleCollection
+						.getPlanningEntryByStrNumber(planningEntryNumber)).getLocationOrigin();
+			String terminal = terminalText.getText();
+			if (terminal.isBlank())
+				terminal = ((FlightSchedule<Resource>) flightScheduleCollection
+						.getPlanningEntryByStrNumber(planningEntryNumber)).getLocationTerminal();
+			Location newLocation = new Location(origin, terminal);
+		});
+	}
+	*/
+
+	/**
+	 * delete resource
+	 */
+	public static void manageResource() {
+		// frame
+		JFrame resourceFrame = new JFrame("Manage Resource");
+		resourceFrame.setLayout(new GridLayout(2, 1));
+		resourceFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		resourceFrame.setVisible(true);
+		resourceFrame.setSize(400, 300);
+		// delete button
+		JPanel topPanel = new JPanel();
+		topPanel.setLayout(new FlowLayout());
+		topPanel.add(new JLabel("Deleting Resource:"));
+		JTextField topText = new JTextField(LINE_WIDTH);
+		topPanel.add(topText);
+		JButton deleteButton = new JButton("Delete");
+		topPanel.add(deleteButton);
+		resourceFrame.add(topPanel);
+		// JScrollPane
+		String resourcesStrings = "";
+		Set<Resource> allResource = flightScheduleCollection.getAllResource();
+		List<Resource> allResourceList = new ArrayList<>();
+		int i = 0;
+		for (Resource plane : allResource) {
+			i++;
+			resourcesStrings += String.valueOf(i) + ": " + ((Plane) plane).toString() + "\n";
+			allResourceList.add(plane);
+		}
+		JTextArea resourceText = new JTextArea(resourcesStrings);
+		JScrollPane scrollPane = new JScrollPane(resourceText);
+		resourceFrame.add(scrollPane);
+		// do
+		deleteButton.addActionListener((e) -> {
+			int num = Integer.valueOf(topText.getText());
+			boolean flag = flightScheduleCollection.deleteResource(allResourceList.get(num));
+			JOptionPane.showMessageDialog(resourceFrame, flag ? "Successful" : "Failed", "Deleting Resource",
+					JOptionPane.PLAIN_MESSAGE);
+		});
+	}
+
+	/**
+	 * delete location
+	 */
+	public static void manageLocation() {
+		// frame
+		JFrame locationFrame = new JFrame("Manage Location");
+		locationFrame.setLayout(new GridLayout(2, 1));
+		locationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		locationFrame.setVisible(true);
+		locationFrame.setSize(400, 300);
+		// delete button
+		JPanel topPanel = new JPanel();
+		topPanel.setLayout(new FlowLayout());
+		topPanel.add(new JLabel("Deleting Resource:"));
+		JTextField topText = new JTextField(LINE_WIDTH);
+		topPanel.add(topText);
+		JButton deleteButton = new JButton("Delete");
+		topPanel.add(deleteButton);
+		locationFrame.add(topPanel);
+		// JScrollPane
+		String locationsStrings = "";
+		Set<String> allLocation = flightScheduleCollection.getAllLocation();
+		List<String> allLocationList = new ArrayList<>();
+		int i = 0;
+		for (String location : allLocation) {
+			i++;
+			locationsStrings += String.valueOf(i) + ": " + location + "\n";
+			allLocationList.add(location);
+		}
+		JTextArea locationText = new JTextArea(locationsStrings);
+		JScrollPane scrollPane = new JScrollPane(locationText);
+		locationFrame.add(scrollPane);
+		// do
+		deleteButton.addActionListener((e) -> {
+			int num = Integer.valueOf(topText.getText());
+			boolean flag = flightScheduleCollection.deleteLocation(allLocationList.get(num));
+			JOptionPane.showMessageDialog(locationFrame, flag ? "Successful" : "Failed", "Deleting Location",
 					JOptionPane.PLAIN_MESSAGE);
 		});
 	}
