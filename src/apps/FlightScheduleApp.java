@@ -11,7 +11,7 @@ import java.awt.*;
 
 import board.*;
 import planningEntry.*;
-import planningEntryAPIs.PlanningEntryAPIs;
+import planningEntryAPIs.*;
 import planningEntryCollection.*;
 import resource.*;
 
@@ -24,6 +24,9 @@ public class FlightScheduleApp {
 	 * default GUI text line width
 	 */
 	private static final int LINE_WIDTH = 16;
+	/**
+	 * flight schedule collection
+	 */
 	private static final FlightScheduleCollection flightScheduleCollection = new FlightScheduleCollection();
 
 	/**
