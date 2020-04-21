@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import location.*;
 import planningEntry.*;
 import resource.*;
 
@@ -132,4 +131,8 @@ public abstract class PlanningEntryCollection {
         return collectionLocation.remove(location);
     }
 
+    /**
+     * sort planning entries
+     */
+    public abstract void sortPlanningEntries();
 }

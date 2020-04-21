@@ -1,6 +1,9 @@
 package planningEntryCollection;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,6 +28,15 @@ public class FlightScheduleCollection extends PlanningEntryCollection {
         return this.addPlanningEntry(planningEntryNumber, departureAirport, arrivalAirport, departureTime, arrivalTime);
     }
 
+    /**
+     * 
+     * @param planningEntryNumber
+     * @param departureAirport
+     * @param arrivalAirport
+     * @param departureTime
+     * @param arrivalTime
+     * @return
+     */
     public FlightSchedule<Resource> addPlanningEntry(String planningEntryNumber, String departureAirport,
             String arrivalAirport, String departureTime, String arrivalTime) {
         Location location = new Location(departureAirport, arrivalAirport);
@@ -57,6 +69,15 @@ public class FlightScheduleCollection extends PlanningEntryCollection {
         return this.allocateResource(planningEntryNumber, number, strType, intSeats, age);
     }
 
+    /**
+     * 
+     * @param planningEntryNumber
+     * @param number
+     * @param strType
+     * @param intSeats
+     * @param age
+     * @return
+     */
     public Resource allocateResource(String planningEntryNumber, String number, String strType, int intSeats,
             double age) {
         Resource plane = Resource.newResourceOfPlane(number, strType, intSeats, age);
@@ -66,16 +87,40 @@ public class FlightScheduleCollection extends PlanningEntryCollection {
         return plane;
     }
 
+    /**
+     * allocate existing resource
+     * @param planningEntryNumber
+     * @param number
+     * @return the allocated resource
+     */
     public Resource allocateResource(String planningEntryNumber, String number) {
         Plane plane = (Plane) this.getPlaneOfNumber(number);
         return this.allocateResource(planningEntryNumber, number, plane.getStrType(), plane.getIntSeats(),
                 plane.getAge());
     }
 
+    /**
+     * get the plane of number
+     * @param number
+     * @return the Plane
+     */
     public Resource getPlaneOfNumber(String number) {
-        for (Resource plane : this.getAllResource())
+        Set<Resource> allResource = this.getAllResource();
+        for (Resource plane : allResource)
             if (((Plane) plane).getNumber().equals(number))
-                return (Plane) plane;
+                return plane;
         return null;
+    }
+
+    @Override
+    public void sortPlanningEntries() {
+        Comparator<PlanningEntry<Resource>> comparator = new Comparator<PlanningEntry<Resource>>() {
+            @Override
+            public int compare(PlanningEntry<Resource> o1, PlanningEntry<Resource> o2) {
+                return ((FlightSchedule<Resource>) o1).getTimeLeaving()
+                        .isBefore(((FlightSchedule<Resource>) o2).getTimeArrival()) ? -1 : 1;
+            }
+        };
+        Collections.sort(planningEntries, comparator);
     }
 }
