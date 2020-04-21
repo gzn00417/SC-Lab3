@@ -120,6 +120,7 @@ public class FlightScheduleApp {
 			}
 		}
 		bReader.close();
+		flightScheduleCollection.sortPlanningEntries();
 	}
 
 	/**
