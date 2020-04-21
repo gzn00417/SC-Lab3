@@ -25,7 +25,7 @@ public class Board {
      * @param vData
      * @param vName
      */
-    protected void makeTable(Vector<Vector<?>> vData, Vector<String> vName) {
+    protected void makeTable(Vector<Vector<?>> vData, Vector<String> vName, String title) {
         DefaultTableModel dataModel = new DefaultTableModel(vData, vName);
         JTable jtable = new JTable();
         jtable.setModel(dataModel);
@@ -35,7 +35,7 @@ public class Board {
         DefaultTableCellRenderer r = new DefaultTableCellRenderer();
         r.setHorizontalAlignment(JLabel.CENTER);
         jtable.setDefaultRenderer(Object.class, r);
-        frame.setTitle("Arriving Flights");
+        frame.setTitle(title);
         frame.setBounds(100, 100, 100, 100);
         frame.setSize(600, 600);
         frame.setVisible(true);
@@ -43,6 +43,10 @@ public class Board {
         frame.add(jscrollpane, BorderLayout.CENTER);
     }
 
+    /**
+     * iterator
+     * @return iterator
+     */
     public Iterator<PlanningEntry<Resource>> iterator() {
         return planningEntryCollection.getAllPlanningEntries().iterator();
     }
