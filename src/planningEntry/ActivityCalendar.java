@@ -3,6 +3,8 @@ package planningEntry;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
+import java.util.Objects;
 
 import location.*;
 import timeSlot.*;
@@ -10,7 +12,7 @@ import timeSlot.*;
 /**
  * a activity calendar containing several documents
  */
-public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
+public class ActivityCalendar<R> extends CommonPlanningEntry<R> implements Comparator {
     /**
      * the stored index in location
      */
@@ -89,4 +91,32 @@ public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
         return LocalDate.parse(this.getBeginningTime().toString().substring(0, 10),
                 DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
+
+    @Override
+    public String toString() {
+        return "{" + " intResourceNumber='" + getIntResourceNumber() + "'" + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof ActivityCalendar)) {
+            return false;
+        }
+        ActivityCalendar<R> activityCalendar = (ActivityCalendar<R>) o;
+        return intResourceNumber == activityCalendar.intResourceNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(intResourceNumber);
+    }
+
+    @Override
+    public int compare(Object o1, Object o2) {
+        return ((ActivityCalendar<R>) o1).getBeginningTime().isBefore(((ActivityCalendar<R>) o2).getBeginningTime()) ? 1
+                : -1;
+    }
+
 }
