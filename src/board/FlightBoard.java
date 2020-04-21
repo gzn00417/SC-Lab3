@@ -27,14 +27,8 @@ public class FlightBoard extends Board {
         super(planningEntryCollection);
     }
 
-    /**
-     * show the all arrival flights in current time at the airport("" if client chooses every airport)
-     * @param planningEntryCollection
-     * @param strCurrentTime
-     * @param strAirportName chosen airport name ("" client it chooses every airport)
-     * @param intFlightType ARRIVAL if visualize the arrival flights, LEAVING if visualize the leaving flights
-     */
-    public void visualize(String strCurrentTime, String strAirportName, int intFlightType) {
+    @Override
+    public void visualize(String strCurrentTime, String strLocation, int intType) {
         Iterator<PlanningEntry<Resource>> iterator = super.iterator();
         Vector<Vector<?>> vData = new Vector<>();
         Vector<String> vName = new Vector<>();
@@ -43,18 +37,18 @@ public class FlightBoard extends Board {
             vName.add(name);
         while (iterator.hasNext()) {
             FlightSchedule<Resource> planningEntry = (FlightSchedule<Resource>) iterator.next();
-            if (!strAirportName.isEmpty()) {
-                if (intFlightType == FlightBoard.ARRIVAL) {
-                    if (!planningEntry.getLocationTerminal().toLowerCase().equals(strAirportName.toLowerCase()))
+            if (!strLocation.isEmpty()) {
+                if (intType == FlightBoard.ARRIVAL) {
+                    if (!planningEntry.getLocationTerminal().toLowerCase().equals(strLocation.toLowerCase()))
                         continue;
                 } else {
-                    if (!planningEntry.getLocationOrigin().toLowerCase().equals(strAirportName.toLowerCase()))
+                    if (!planningEntry.getLocationOrigin().toLowerCase().equals(strLocation.toLowerCase()))
                         continue;
                 }
             }
             LocalDateTime currentTime = LocalDateTime.parse(strCurrentTime,
                     DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-            LocalDateTime scheduleTime = intFlightType == FlightBoard.ARRIVAL ? planningEntry.getTimeArrival()
+            LocalDateTime scheduleTime = intType == FlightBoard.ARRIVAL ? planningEntry.getTimeArrival()
                     : planningEntry.getTimeLeaving();
             if (scheduleTime.isBefore(currentTime.plusHours(HOURS_RANGE))
                     && scheduleTime.isAfter(currentTime.minusHours(HOURS_RANGE))) {
@@ -73,13 +67,10 @@ public class FlightBoard extends Board {
                 vData.add((Vector<?>) vRow.clone());
             }
         }
-        makeTable(vData, vName, intFlightType == ARRIVAL ? "Arrival" : "Leaving");
+        makeTable(vData, vName, intType == ARRIVAL ? "Arrival" : "Leaving");
     }
 
-    /**
-     * show all entries using r
-     * @param r
-     */
+    @Override
     public void showEntries(Resource r) {
         Iterator<PlanningEntry<Resource>> iterator = super.iterator();
         Vector<Vector<?>> vData = new Vector<>();
