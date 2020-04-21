@@ -27,7 +27,7 @@ public class FlightScheduleApp {
 	/**
 	 * flight schedule collection
 	 */
-	private static final FlightScheduleCollection flightScheduleCollection = new FlightScheduleCollection();
+	private final static FlightScheduleCollection flightScheduleCollection = new FlightScheduleCollection();
 
 	/**
 	 * initialize planning entry
@@ -36,7 +36,7 @@ public class FlightScheduleApp {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		readFile("data/FlightSchedule/FlightSchedule_5.txt");
+		readFile("data/FlightSchedule/FlightSchedule_2.txt");
 		// main
 		JFrame mainFrame = new JFrame("Flight Schedule");
 		mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -517,5 +517,26 @@ public class FlightScheduleApp {
 		oneResourceEntriesFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		oneResourceEntriesFrame.setVisible(true);
 		oneResourceEntriesFrame.setSize(400, 300);
+		// resource number
+		JPanel resourceNumberPanel = new JPanel();
+		resourceNumberPanel.setLayout(new FlowLayout());
+		resourceNumberPanel.add(new JLabel("Plane Number:"));
+		JTextField resourceNumberText = new JTextField(LINE_WIDTH);
+		resourceNumberPanel.add(resourceNumberText);
+		oneResourceEntriesFrame.add(resourceNumberPanel);
+		// enter button
+		JButton enterButton = new JButton("Enter");
+		oneResourceEntriesFrame.add(enterButton);
+		// do
+		FlightBoard board = new FlightBoard(flightScheduleCollection);
+		enterButton.addActionListener((e) -> {
+			String resourceNumber = resourceNumberText.getText();
+			Resource plane = flightScheduleCollection.getPlaneOfNumber(resourceNumber);
+			if (plane == null)
+				JOptionPane.showConfirmDialog(oneResourceEntriesFrame, "Not Found " + resourceNumber, "Error",
+						JOptionPane.WARNING_MESSAGE);
+			else
+				board.showEntries(plane);
+		});
 	}
 }
