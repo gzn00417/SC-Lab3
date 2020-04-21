@@ -21,7 +21,7 @@ public abstract class Board {
     }
 
     /**
-     * 
+     * visualize planning entries at current time in chosen location of the type
      * @param strCurrentTime
      * @param strLocation
      * @param intType
@@ -29,7 +29,7 @@ public abstract class Board {
     public abstract void visualize(String strCurrentTime, String strLocation, int intType);
 
     /**
-     * 
+     * show all entries using r
      * @param r
      */
     public abstract void showEntries(Resource r);
@@ -41,20 +41,20 @@ public abstract class Board {
      */
     protected void makeTable(Vector<Vector<?>> vData, Vector<String> vName, String title) {
         DefaultTableModel dataModel = new DefaultTableModel(vData, vName);
-        JTable jtable = new JTable();
-        jtable.setModel(dataModel);
-        JScrollPane jscrollpane = new JScrollPane(jtable);
-        jtable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jtable.getColumn("").setPreferredWidth(0);
+        JTable table = new JTable();
+        table.setModel(dataModel);
+        JScrollPane scrollPane = new JScrollPane(table);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        table.getColumn("").setPreferredWidth(0);
         DefaultTableCellRenderer r = new DefaultTableCellRenderer();
         r.setHorizontalAlignment(JLabel.CENTER);
-        jtable.setDefaultRenderer(Object.class, r);
+        table.setDefaultRenderer(Object.class, r);
         frame.setTitle(title);
         frame.setBounds(100, 100, 100, 100);
         frame.setSize(800, 600);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.add(jscrollpane, BorderLayout.CENTER);
+        frame.add(scrollPane, BorderLayout.CENTER);
     }
 
     /**
