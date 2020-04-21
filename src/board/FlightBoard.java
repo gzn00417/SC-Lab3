@@ -73,7 +73,7 @@ public class FlightBoard extends Board {
                 vData.add((Vector<?>) vRow.clone());
             }
         }
-        makeTable(vData, vName, intFlightType == this.ARRIVAL ? "Arrival" : "Leaving");
+        makeTable(vData, vName, intFlightType == ARRIVAL ? "Arrival" : "Leaving");
     }
 
     /**
@@ -89,7 +89,7 @@ public class FlightBoard extends Board {
             vName.add(name);
         while (iterator.hasNext()) {
             FlightSchedule<Resource> planningEntry = (FlightSchedule<Resource>) iterator.next();
-            if (!planningEntry.getResource().equals(r))
+            if (planningEntry.getResource() != null && !planningEntry.getResource().equals(r))
                 continue;
             String strScheduleTime = planningEntry.getTimeLeaving() + " - " + planningEntry.getTimeArrival();
             String planningEntryNumber = planningEntry.getPlanningEntryNumber();
