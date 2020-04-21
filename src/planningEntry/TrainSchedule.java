@@ -14,7 +14,7 @@ import timeSlot.*;
 /**
  * a train plan containing several trains
  */
-public class TrainSchedule<R> extends CommonPlanningEntry<R> implements Comparator {
+public class TrainSchedule<R> extends CommonPlanningEntry<R> {
     /**
      * list of ordered train
      */
@@ -89,9 +89,4 @@ public class TrainSchedule<R> extends CommonPlanningEntry<R> implements Comparat
                 DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
-    @Override
-    public int compare(Object o1, Object o2) {
-        return ((TrainSchedule<R>) o1).getLeavingTimeOfIndex(ORIGIN)
-                .isBefore(((TrainSchedule<R>) o2).getArrivalTimeOfIndex(TERMINAL)) ? 1 : -1;
-    }
 }

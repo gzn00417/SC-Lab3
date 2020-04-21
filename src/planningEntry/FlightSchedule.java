@@ -12,7 +12,7 @@ import timeSlot.*;
 /**
  * a flight plan containing information of plane, locations and time slot
  */
-public class FlightSchedule<R> extends CommonPlanningEntry<R> implements Comparator {
+public class FlightSchedule<R> extends CommonPlanningEntry<R> {
     /**
      * index of origin or terminal in locations
      */
@@ -93,11 +93,6 @@ public class FlightSchedule<R> extends CommonPlanningEntry<R> implements Compara
     @Override
     public int hashCode() {
         return Objects.hash(this.getPlanningDate(), this.getPlanningEntryNumber());
-    }
-
-    @Override
-    public int compare(Object o1, Object o2) {
-        return ((FlightSchedule<R>) o1).getTimeLeaving().isBefore(((FlightSchedule<R>) o2).getTimeArrival()) ? 1 : -1;
     }
 
 }

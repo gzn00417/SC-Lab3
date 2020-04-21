@@ -12,7 +12,7 @@ import timeSlot.*;
 /**
  * a activity calendar containing several documents
  */
-public class ActivityCalendar<R> extends CommonPlanningEntry<R> implements Comparator {
+public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
     /**
      * the stored index in location
      */
@@ -111,12 +111,6 @@ public class ActivityCalendar<R> extends CommonPlanningEntry<R> implements Compa
     @Override
     public int hashCode() {
         return Objects.hashCode(intResourceNumber);
-    }
-
-    @Override
-    public int compare(Object o1, Object o2) {
-        return ((ActivityCalendar<R>) o1).getBeginningTime().isBefore(((ActivityCalendar<R>) o2).getBeginningTime()) ? 1
-                : -1;
     }
 
 }
