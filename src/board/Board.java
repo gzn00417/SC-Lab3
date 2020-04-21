@@ -12,13 +12,27 @@ import java.awt.*;
 import java.util.Iterator;
 import java.util.Vector;
 
-public class Board {
+public abstract class Board {
     protected final JFrame frame = new JFrame();
     protected final PlanningEntryCollection planningEntryCollection;
 
     public Board(PlanningEntryCollection planningEntryCollection) {
         this.planningEntryCollection = planningEntryCollection;
     }
+
+    /**
+     * 
+     * @param strCurrentTime
+     * @param strLocation
+     * @param intType
+     */
+    public abstract void visualize(String strCurrentTime, String strLocation, int intType);
+
+    /**
+     * 
+     * @param r
+     */
+    public abstract void showEntries(Resource r);
 
     /**
      * make a table
