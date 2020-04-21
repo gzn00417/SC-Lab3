@@ -1,5 +1,7 @@
 package planningEntry;
 
+import java.util.Comparator;
+
 import entryState.EntryState;
 import location.Location;
 import timeSlot.TimeSlot;

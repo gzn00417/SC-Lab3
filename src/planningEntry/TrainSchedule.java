@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import location.*;
@@ -13,11 +14,12 @@ import timeSlot.*;
 /**
  * a train plan containing several trains
  */
-public class TrainSchedule<R> extends CommonPlanningEntry<R> {
+public class TrainSchedule<R> extends CommonPlanningEntry<R> implements Comparator {
     /**
      * list of ordered train
      */
     private final List<R> resources = new ArrayList<>();
+    private int ORIGIN, TERMINAL;
 
     /**
      * constructor
@@ -28,7 +30,6 @@ public class TrainSchedule<R> extends CommonPlanningEntry<R> {
     public TrainSchedule(Location location, TimeSlot timeSlot, String planningEntryNumber) {
         super(location, timeSlot, planningEntryNumber);
         this.strPlanningEntryType = "TrainSchedule";
-        System.out.println("TrainSchedule");
     }
 
     /**
@@ -39,6 +40,8 @@ public class TrainSchedule<R> extends CommonPlanningEntry<R> {
      */
     public Boolean allocateResource(R... resources) {
         this.resources.addAll(Arrays.asList(resources));
+        this.ORIGIN = 0;
+        this.TERMINAL = this.resources.size();
         return this.state.setNewState(strPlanningEntryType, "Allocated");
     }
 
@@ -66,7 +69,7 @@ public class TrainSchedule<R> extends CommonPlanningEntry<R> {
      * @return the LocalDateTime of leaving time of No.indexLocation Location
      */
     public LocalDateTime getLeavingTimeOfIndex(int indexLocation) {
-        assert (indexLocation != super.getTimeSlot().getLeaving().size() - 1);
+        assert (indexLocation != TERMINAL);
         return super.getTimeSlot().getLeaving().get(indexLocation);
     }
 
@@ -76,13 +79,19 @@ public class TrainSchedule<R> extends CommonPlanningEntry<R> {
      * @return the LocalDateTime of arrival time of No.indexLocation Location
      */
     public LocalDateTime getArrivalTimeOfIndex(int indexLocation) {
-        assert (indexLocation != 0);
+        assert (indexLocation != ORIGIN);
         return super.getTimeSlot().getArrival().get(indexLocation);
     }
 
     @Override
     public LocalDate getPlanningDate() {
-        return LocalDate.parse(this.getLeavingTimeOfIndex(0).toString().substring(0, 10),
+        return LocalDate.parse(this.getLeavingTimeOfIndex(ORIGIN).toString().substring(0, 10),
                 DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+    @Override
+    public int compare(Object o1, Object o2) {
+        return ((TrainSchedule<R>) o1).getLeavingTimeOfIndex(ORIGIN)
+                .isBefore(((TrainSchedule<R>) o2).getArrivalTimeOfIndex(TERMINAL)) ? 1 : -1;
     }
 }

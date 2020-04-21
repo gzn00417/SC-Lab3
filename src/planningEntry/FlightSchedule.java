@@ -3,6 +3,7 @@ package planningEntry;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.Objects;
 
 import location.*;
@@ -11,7 +12,7 @@ import timeSlot.*;
 /**
  * a flight plan containing information of plane, locations and time slot
  */
-public class FlightSchedule<R> extends CommonPlanningEntry<R> {
+public class FlightSchedule<R> extends CommonPlanningEntry<R> implements Comparator {
     /**
      * index of origin or terminal in locations
      */
@@ -92,6 +93,11 @@ public class FlightSchedule<R> extends CommonPlanningEntry<R> {
     @Override
     public int hashCode() {
         return Objects.hash(this.getPlanningDate(), this.getPlanningEntryNumber());
+    }
+
+    @Override
+    public int compare(Object o1, Object o2) {
+        return ((FlightSchedule<R>) o1).getTimeLeaving().isBefore(((FlightSchedule<R>) o2).getTimeArrival()) ? 1 : -1;
     }
 
 }
