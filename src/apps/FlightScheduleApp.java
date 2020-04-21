@@ -47,28 +47,34 @@ public class FlightScheduleApp {
 		JButton visualizeButton = new JButton("Visualize");
 		mainFrame.add(visualizeButton);
 		visualizeButton.addActionListener((e) -> visualization());
+
 		// add planning entry
 		JButton addPlanningEntryButton = new JButton("Add Planning Entry");
 		mainFrame.add(addPlanningEntryButton);
 		addPlanningEntryButton.addActionListener((e) -> addPlanningEntry());
+
 		// allocate resource
 		JButton allocateResourceButton = new JButton("Allocate Resource");
 		mainFrame.add(allocateResourceButton);
 		allocateResourceButton.addActionListener((e) -> allocateResource());
+
 		// ask state
 		JButton askStateButton = new JButton("Ask State");
 		mainFrame.add(askStateButton);
 		askStateButton.addActionListener((e) -> askState());
+
 		// Title
-		mainFrame.add(new JLabel("Flight\nSchedule"));
+		// mainFrame.add(new JLabel("Flight\nSchedule"));
 		// operate planning entry
 		JButton operatePlanningEntryButton = new JButton("Operate Planning Entry");
 		mainFrame.add(operatePlanningEntryButton);
 		operatePlanningEntryButton.addActionListener((e) -> operatePlanningEntry());
+
 		// APIs
 		JButton apisButton = new JButton("APIs");
 		mainFrame.add(apisButton);
 		apisButton.addActionListener((e) -> apis());
+
 		/*
 		// modify location
 		JButton modifyLocationButton = new JButton("Modify Location");
@@ -79,10 +85,16 @@ public class FlightScheduleApp {
 		JButton resourceButton = new JButton("Manage Resource");
 		mainFrame.add(resourceButton);
 		resourceButton.addActionListener((e) -> manageResource());
+
 		// manage locations
 		JButton locationButton = new JButton("Manage Location");
 		mainFrame.add(locationButton);
 		locationButton.addActionListener((e) -> manageLocation());
+
+		// planning entry using the same resource
+		JButton oneResourceEntriesButton = new JButton("One Resource Entries");
+		mainFrame.add(oneResourceEntriesButton);
+		oneResourceEntriesButton.addActionListener((e) -> oneResourceEntries());
 	}
 
 	/**
