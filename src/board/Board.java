@@ -37,7 +37,7 @@ public class Board {
         jtable.setDefaultRenderer(Object.class, r);
         frame.setTitle(title);
         frame.setBounds(100, 100, 100, 100);
-        frame.setSize(600, 600);
+        frame.setSize(800, 600);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(jscrollpane, BorderLayout.CENTER);
