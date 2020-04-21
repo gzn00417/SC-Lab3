@@ -158,16 +158,16 @@ public class FlightScheduleApp {
 		visualizeLeavingPanel.add(leavingButton);
 		visualizeOptionFrame.add(visualizeLeavingPanel);
 		// button
-		FlightBoard board = new FlightBoard();
+		FlightBoard board = new FlightBoard(flightScheduleCollection);
 		arrivalButton.addActionListener((e_) -> {
 			String strCurrentTime = currentTimeText.getText();
 			String strAirport = arrivalAirportText.getText();
-			board.visualize(flightScheduleCollection, strCurrentTime, strAirport, FlightBoard.ARRIVAL);
+			board.visualize(strCurrentTime, strAirport, FlightBoard.ARRIVAL);
 		});
 		leavingButton.addActionListener((e_) -> {
 			String strCurrentTime = currentTimeText.getText();
 			String strAirport = leavingAirportText.getText();
-			board.visualize(flightScheduleCollection, strCurrentTime, strAirport, FlightBoard.LEAVING);
+			board.visualize(strCurrentTime, strAirport, FlightBoard.LEAVING);
 		});
 	}
 
@@ -508,5 +508,14 @@ public class FlightScheduleApp {
 			JOptionPane.showMessageDialog(locationFrame, flag ? "Successful" : "Failed", "Deleting Location",
 					JOptionPane.PLAIN_MESSAGE);
 		});
+	}
+
+	public static void oneResourceEntries() {
+		// frame
+		JFrame oneResourceEntriesFrame = new JFrame("One Resource Entries");
+		oneResourceEntriesFrame.setLayout(new GridLayout(2, 1));
+		oneResourceEntriesFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		oneResourceEntriesFrame.setVisible(true);
+		oneResourceEntriesFrame.setSize(400, 300);
 	}
 }
