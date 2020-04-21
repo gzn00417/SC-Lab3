@@ -19,7 +19,8 @@ public class TrainSchedule<R> extends CommonPlanningEntry<R> {
      * list of ordered train
      */
     private final List<R> resources = new ArrayList<>();
-    private int ORIGIN, TERMINAL;
+    public int ORIGIN = 0, TERMINAL = 0;
+    public int LENGTH = 0;
 
     /**
      * constructor
@@ -41,7 +42,8 @@ public class TrainSchedule<R> extends CommonPlanningEntry<R> {
     public Boolean allocateResource(R... resources) {
         this.resources.addAll(Arrays.asList(resources));
         this.ORIGIN = 0;
-        this.TERMINAL = this.resources.size();
+        this.LENGTH = this.resources.size();
+        this.TERMINAL = this.resources.size() - 1;
         return this.state.setNewState(strPlanningEntryType, "Allocated");
     }
 
