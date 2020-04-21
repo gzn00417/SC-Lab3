@@ -35,7 +35,7 @@ public class FlightBoard extends Board {
      * @param intFlightType ARRIVAL if visualize the arrival flights, LEAVING if visualize the leaving flights
      */
     public void visualize(String strCurrentTime, String strAirportName, int intFlightType) {
-        Iterator<PlanningEntry<Resource>> iterator = this.iterator();
+        Iterator<PlanningEntry<Resource>> iterator = super.iterator();
         Vector<Vector<?>> vData = new Vector<>();
         Vector<String> vName = new Vector<>();
         String[] columnsNames = new String[] { "Time", "Entry Number", "Origin", "", "Terminal", "State" };
@@ -73,6 +73,38 @@ public class FlightBoard extends Board {
                 vData.add((Vector<?>) vRow.clone());
             }
         }
-        makeTable(vData, vName);
+        makeTable(vData, vName, intFlightType == this.ARRIVAL ? "Arrival" : "Leaving");
+    }
+
+    /**
+     * show all entries using r
+     * @param r
+     */
+    public void showEntries(Resource r) {
+        Iterator<PlanningEntry<Resource>> iterator = super.iterator();
+        Vector<Vector<?>> vData = new Vector<>();
+        Vector<String> vName = new Vector<>();
+        String[] columnsNames = new String[] { "Time", "Entry Number", "Origin", "", "Terminal", "State" };
+        for (String name : columnsNames)
+            vName.add(name);
+        while (iterator.hasNext()) {
+            FlightSchedule<Resource> planningEntry = (FlightSchedule<Resource>) iterator.next();
+            if (!planningEntry.getResource().equals(r))
+                continue;
+            String strScheduleTime = planningEntry.getTimeLeaving() + " - " + planningEntry.getTimeArrival();
+            String planningEntryNumber = planningEntry.getPlanningEntryNumber();
+            String locationOrigin = planningEntry.getLocationOrigin();
+            String locationTerminal = planningEntry.getLocationTerminal();
+            String state = planningEntry.getState().getStrState();
+            Vector<String> vRow = new Vector<>();
+            vRow.add(strScheduleTime);
+            vRow.add(planningEntryNumber);
+            vRow.add(locationOrigin);
+            vRow.add("-->");
+            vRow.add(locationTerminal);
+            vRow.add(state);
+            vData.add((Vector<?>) vRow.clone());
+        }
+        super.makeTable(vData, vName, "Entries");
     }
 }
