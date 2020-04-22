@@ -1,6 +1,8 @@
 package entryState;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public enum EntryStateEnum {
@@ -29,9 +31,17 @@ public enum EntryStateEnum {
         }
     };
 
+    public static final List<String> keyWords = new ArrayList<String>() {
+        private static final long serialVersionUID = 1L;
+        {
+            add("Train");
+        }
+    };
+
     public EntryStateEnum[] newStateAchievable(String strPlanningEntryType) {
-        if (strPlanningEntryType.contains("Train"))
-            return EntryStateEnum.newStateAchievableBlockedAble.get(this);
+        for (String str : keyWords)
+            if (strPlanningEntryType.contains(str))
+                return EntryStateEnum.newStateAchievableBlockedAble.get(this);
         return EntryStateEnum.newStateAchievableBlockedDisable.get(this);
     }
 }
