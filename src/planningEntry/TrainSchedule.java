@@ -18,8 +18,26 @@ public class TrainSchedule<R> extends CommonPlanningEntry<R> {
      * list of ordered train
      */
     private final List<R> resources = new ArrayList<>();
+    /**
+     * origin and terminal index
+     */
     public int ORIGIN = 0, TERMINAL = 0;
+    /**
+     * number of stations
+     */
     public int LENGTH = 0;
+
+    /*
+     * AF:
+     * list of resource represent several trains
+     * location represents stations
+     * 
+     * RI:
+     * list must be at least 1-length
+     * 
+     * Safety:
+     * do not provide mutator or expose various
+     */
 
     /**
      * constructor
