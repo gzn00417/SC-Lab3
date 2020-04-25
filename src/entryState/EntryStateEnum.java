@@ -5,9 +5,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * enum of entry state
+ */
 public enum EntryStateEnum {
+    /**
+     * they represent 6 states of the planning entry
+     */
     WAITING, ALLOCATED, RUNNING, BLOCKED, ENDED, CANCELLED;
 
+    /**
+     * achievable states map for entries able to be blocked
+     */
     public static final Map<EntryStateEnum, EntryStateEnum[]> newStateAchievableBlockedAble = new HashMap<EntryStateEnum, EntryStateEnum[]>() {
         private static final long serialVersionUID = 1L;
         {
@@ -20,6 +29,9 @@ public enum EntryStateEnum {
         }
     };
 
+    /**
+     * achievable states map for entries not able to be blocked
+     */
     public static final Map<EntryStateEnum, EntryStateEnum[]> newStateAchievableBlockedDisable = new HashMap<EntryStateEnum, EntryStateEnum[]>() {
         private static final long serialVersionUID = 1L;
         {
@@ -31,6 +43,9 @@ public enum EntryStateEnum {
         }
     };
 
+    /**
+     * define which is able to be blocked
+     */
     public static final List<String> keyWords = new ArrayList<String>() {
         private static final long serialVersionUID = 1L;
         {
@@ -38,6 +53,11 @@ public enum EntryStateEnum {
         }
     };
 
+    /**
+     * get all states achievable
+     * @param strPlanningEntryType
+     * @return array of the states
+     */
     public EntryStateEnum[] newStateAchievable(String strPlanningEntryType) {
         for (String str : keyWords)
             if (strPlanningEntryType.contains(str))
