@@ -21,6 +21,21 @@ public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
      */
     private int intResourceNumber;
 
+    /*
+     * AF:
+     * location represents the active location
+     * resource represents the documents
+     * intResourceNumber represent the number of the documents
+     * 
+     * RI:
+     * list in location must be 1-length
+     * list in timeSlot must be 2-length
+     * resource must be document
+     * 
+     * Safety:
+     * do not provide mutator or expose various
+     */
+
     /**
      * constructor
      * @param location
