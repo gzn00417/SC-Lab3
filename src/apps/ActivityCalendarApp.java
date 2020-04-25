@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import board.*;
+import location.Location;
 import planningEntry.*;
 import planningEntryAPIs.*;
 import planningEntryCollection.*;
@@ -40,7 +41,7 @@ public class ActivityCalendarApp {
         // main
         JFrame mainFrame = new JFrame("Flight Schedule");
         mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        mainFrame.setLayout(new GridLayout(3, 3, 10, 5));
+        mainFrame.setLayout(new GridLayout(2, 5, 10, 5));
         mainFrame.setVisible(true);
         mainFrame.setSize(800, 300);
         // visualization
@@ -75,12 +76,11 @@ public class ActivityCalendarApp {
         mainFrame.add(apisButton);
         apisButton.addActionListener((e) -> apis());
 
-        /*
         // modify location
         JButton modifyLocationButton = new JButton("Modify Location");
         mainFrame.add(modifyLocationButton);
         modifyLocationButton.addActionListener((e) -> modifyLocation());
-        */
+
         // manage resources
         JButton resourceButton = new JButton("Manage Resource");
         mainFrame.add(resourceButton);
@@ -385,49 +385,47 @@ public class ActivityCalendarApp {
         });
     }
 
-    /*
     public static void modifyLocation() {
-    	// frame
-    	JFrame modifyLocationFrame = new JFrame("Modify Location");
-    	modifyLocationFrame.setLayout(new GridLayout(3, 1));
-    	modifyLocationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    	modifyLocationFrame.setVisible(true);
-    	modifyLocationFrame.setSize(400, 300);
-    	// planning entry number
-    	JPanel planningEntryNumberPanel = new JPanel();
-    	planningEntryNumberPanel.setLayout(new FlowLayout());
-    	planningEntryNumberPanel.add(new JLabel("Planning Entry Number:"));
-    	JTextField planningEntryNumberText = new JTextField(LINE_WIDTH);
-    	planningEntryNumberPanel.add(planningEntryNumberText);
-    	modifyLocationFrame.add(planningEntryNumberPanel);
-    	// locations
-    	JPanel locationsPanel = new JPanel();
-    	locationsPanel.setLayout(new FlowLayout());
-    	locationsPanel.add(new JLabel("Origin:"));
-    	JTextField originText = new JTextField(LINE_WIDTH);
-    	locationsPanel.add(originText);
-    	locationsPanel.add(new JLabel("Terminal:"));
-    	JTextField terminalText = new JTextField(LINE_WIDTH);
-    	locationsPanel.add(terminalText);
-    	modifyLocationFrame.add(locationsPanel);
-    	// enter button
-    	JButton enterButton = new JButton("Enter");
-    	modifyLocationFrame.add(enterButton);
-    	// do
-    	enterButton.addActionListener((e) -> {
-    		String planningEntryNumber = planningEntryNumberText.getText();
-    		String origin = originText.getText();
-    		if (origin.isBlank())
-    			origin = ((FlightSchedule<Resource>) flightScheduleCollection
-    					.getPlanningEntryByStrNumber(planningEntryNumber)).getLocationOrigin();
-    		String terminal = terminalText.getText();
-    		if (terminal.isBlank())
-    			terminal = ((FlightSchedule<Resource>) flightScheduleCollection
-    					.getPlanningEntryByStrNumber(planningEntryNumber)).getLocationTerminal();
-    		Location newLocation = new Location(origin, terminal);
-    	});
+        // frame
+        JFrame modifyLocationFrame = new JFrame("Modify Location");
+        modifyLocationFrame.setLayout(new GridLayout(3, 1));
+        modifyLocationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        modifyLocationFrame.setVisible(true);
+        modifyLocationFrame.setSize(400, 300);
+        // planning entry number
+        JPanel planningEntryNumberPanel = new JPanel();
+        planningEntryNumberPanel.setLayout(new FlowLayout());
+        planningEntryNumberPanel.add(new JLabel("Planning Entry Number:"));
+        JTextField planningEntryNumberText = new JTextField(LINE_WIDTH);
+        planningEntryNumberPanel.add(planningEntryNumberText);
+        modifyLocationFrame.add(planningEntryNumberPanel);
+        // locations
+        JPanel locationsPanel = new JPanel();
+        locationsPanel.setLayout(new FlowLayout());
+        locationsPanel.add(new JLabel("Origin:"));
+        JTextField originText = new JTextField(LINE_WIDTH);
+        locationsPanel.add(originText);
+        locationsPanel.add(new JLabel("Terminal:"));
+        JTextField terminalText = new JTextField(LINE_WIDTH);
+        locationsPanel.add(terminalText);
+        modifyLocationFrame.add(locationsPanel);
+        // enter button
+        JButton enterButton = new JButton("Enter");
+        modifyLocationFrame.add(enterButton);
+        // do
+        enterButton.addActionListener((e) -> {
+            String planningEntryNumber = planningEntryNumberText.getText();
+            String origin = originText.getText();
+            if (origin.isBlank())
+                origin = ((FlightSchedule<Resource>) flightScheduleCollection
+                        .getPlanningEntryByStrNumber(planningEntryNumber)).getLocationOrigin();
+            String terminal = terminalText.getText();
+            if (terminal.isBlank())
+                terminal = ((FlightSchedule<Resource>) flightScheduleCollection
+                        .getPlanningEntryByStrNumber(planningEntryNumber)).getLocationTerminal();
+            Location newLocation = new Location(origin, terminal);
+        });
     }
-    */
 
     /**
      * delete resource
