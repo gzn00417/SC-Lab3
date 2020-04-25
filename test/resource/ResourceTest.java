@@ -27,6 +27,6 @@ public class ResourceTest {
         Document document = Resource.newResourceOfDocument("Software", "HIT", "2000-01-01");
         assertEquals("Software", document.getDocName());
         assertEquals("HIT", document.getStrPublishDepartment());
-        assertEquals("2000-01-01", document.getStrPublishDate().toString());
+        assertEquals("2000-01-01", document.getPublishDate().toString());
     }
 }

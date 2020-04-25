@@ -58,7 +58,7 @@ public class Document implements Resource {
      * get the LocalDate of publish date
      * @return the LocalDate of publish date
      */
-    public LocalDate getpublishDate() {
+    public LocalDate getPublishDate() {
         return this.publishDate;
     }
 
@@ -83,7 +83,7 @@ public class Document implements Resource {
     @Override
     public String toString() {
         return "{" + " docName='" + getDocName() + "'" + ", strPublishDepartment='" + getStrPublishDepartment() + "'"
-                + ", publishDate='" + getpublishDate() + "'" + "}";
+                + ", publishDate='" + getPublishDate() + "'" + "}";
     }
 
 }
