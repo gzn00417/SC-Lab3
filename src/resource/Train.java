@@ -10,6 +10,19 @@ public class Train implements Resource {
     private final String trainType;
     private final int trainCapacity;
 
+    /*
+     * AF:
+     * trainNumber represents the number of the train
+     * trainType represents the type of the train
+     * trainCapacity represents the number of the seats
+     * 
+     * RI:
+     * trainCapacity > 0
+     * 
+     * safety:
+     * do not provide mutator or expose various
+     */
+
     /**
      * constructor
      * @param trainNumber
