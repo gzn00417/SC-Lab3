@@ -11,18 +11,31 @@ import java.util.Objects;
 public class Document implements Resource {
     private final String docName;
     private final String strPublishDepartment;
-    private final LocalDate strPublishDate;
+    private final LocalDate publishDate;
+
+    /*
+     * AF:
+     * docName represents the name of the document
+     * strPublishDepartment represent the department who publishes it
+     * publishDate represents the date of the publish
+     * 
+     * RI:
+     * publishDate must be before new
+     * 
+     * Safety:
+     * do not provide mutator or expose various
+     */
 
     /**
      * constructor
      * @param docName
      * @param strPublishDepartment
-     * @param strPublishDate
+     * @param publishDate
      */
     public Document(String docName, String strPublishDepartment, String strPublishDate) {
         this.docName = docName;
         this.strPublishDepartment = strPublishDepartment;
-        this.strPublishDate = LocalDate.parse(strPublishDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.publishDate = LocalDate.parse(strPublishDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     /**
@@ -45,8 +58,8 @@ public class Document implements Resource {
      * get the LocalDate of publish date
      * @return the LocalDate of publish date
      */
-    public LocalDate getStrPublishDate() {
-        return this.strPublishDate;
+    public LocalDate getpublishDate() {
+        return this.publishDate;
     }
 
     @Override
@@ -59,18 +72,18 @@ public class Document implements Resource {
         Document document = (Document) o;
         return Objects.equals(docName, document.docName)
                 && Objects.equals(strPublishDepartment, document.strPublishDepartment)
-                && Objects.equals(strPublishDate, document.strPublishDate);
+                && Objects.equals(publishDate, document.publishDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(docName, strPublishDepartment, strPublishDate);
+        return Objects.hash(docName, strPublishDepartment, publishDate);
     }
 
     @Override
     public String toString() {
         return "{" + " docName='" + getDocName() + "'" + ", strPublishDepartment='" + getStrPublishDepartment() + "'"
-                + ", strPublishDate='" + getStrPublishDate() + "'" + "}";
+                + ", publishDate='" + getpublishDate() + "'" + "}";
     }
 
 }
