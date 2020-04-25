@@ -11,6 +11,15 @@ import java.util.Objects;
 public class EntryState {
     private EntryStateEnum state;
 
+    /*
+     * AF:
+     * the state enum's name represents the state 
+     * RI:
+     * state must be in enums
+     * Safety:
+     * it's a mutable object, but do not let the outside modify state directly
+     */
+
     public EntryState(String stateName) {
         this.state = EntryStateEnum.valueOf(stateName.toUpperCase());
         checkRep();
