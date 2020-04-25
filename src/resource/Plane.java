@@ -11,6 +11,20 @@ public class Plane implements Resource {
     private final String strType;
     private final int intSeats;
     private final double age;
+    /*
+     * AF:
+     * number represents the number of the plane
+     * strType represent the type of the plane
+     * intSeats represents the number of the seats
+     * age represents the age of the plane
+     * 
+     * RI:
+     * intSeats > 0
+     * age > 0
+     * 
+     * safety:
+     * do not provide mutator or expose various
+     */
 
     /**
      * constructor
