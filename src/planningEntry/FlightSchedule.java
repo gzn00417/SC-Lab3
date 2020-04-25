@@ -17,6 +17,18 @@ public class FlightSchedule<R> extends CommonPlanningEntry<R> {
      */
     private static final int ORIGIN = 0, TERMINAL = 1;
 
+    /*
+     * AF:
+     * location represents the airports
+     * resource represents the planes
+     * 
+     * RI:
+     * location and timeSlot must be 2-length
+     * 
+     * Safety:
+     * do not provide mutator or expose various
+     */
+
     /**
      * constructor
      * @param location
