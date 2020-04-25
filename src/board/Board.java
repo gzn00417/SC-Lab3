@@ -10,6 +10,7 @@ import resource.*;
 
 import java.awt.*;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Vector;
 
 public abstract class Board {
@@ -64,4 +65,21 @@ public abstract class Board {
     public Iterator<PlanningEntry<Resource>> iterator() {
         return planningEntryCollection.getAllPlanningEntries().iterator();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Board)) {
+            return false;
+        }
+        Board board = (Board) o;
+        return Objects.equals(planningEntryCollection, board.planningEntryCollection);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(frame, planningEntryCollection);
+    }
+
 }
