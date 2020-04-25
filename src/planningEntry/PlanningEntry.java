@@ -1,13 +1,11 @@
 package planningEntry;
 
-import java.util.Comparator;
-
 import entryState.EntryState;
 import location.Location;
 import timeSlot.TimeSlot;
 
 /**
- * 
+ * interface of 3 planning entries
  */
 public interface PlanningEntry<R> {
     /**
