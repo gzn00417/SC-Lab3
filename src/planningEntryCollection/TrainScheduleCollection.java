@@ -35,7 +35,7 @@ public class TrainScheduleCollection extends PlanningEntryCollection {
      * @param arrivalAirport
      * @param departureTime
      * @param arrivalTime
-     * @return
+     * @return the added planning entry
      */
     public FlightSchedule<Resource> addPlanningEntry(String planningEntryNumber, String departureAirport,
             String arrivalAirport, String departureTime, String arrivalTime) {
@@ -76,7 +76,7 @@ public class TrainScheduleCollection extends PlanningEntryCollection {
      * @param strType
      * @param intSeats
      * @param age
-     * @return
+     * @return the allocated resource
      */
     public Resource allocateResource(String planningEntryNumber, String number, String strType, int intSeats,
             double age) {

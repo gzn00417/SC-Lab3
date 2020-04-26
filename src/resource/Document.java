@@ -30,7 +30,7 @@ public class Document implements Resource {
      * constructor
      * @param docName
      * @param strPublishDepartment
-     * @param publishDate
+     * @param strPublishDate
      */
     public Document(String docName, String strPublishDepartment, String strPublishDate) {
         this.docName = docName;

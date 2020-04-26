@@ -39,6 +39,7 @@ public abstract class Board {
      * make a table
      * @param vData
      * @param vName
+     * @param title
      */
     protected void makeTable(Vector<Vector<?>> vData, Vector<String> vName, String title) {
         DefaultTableModel dataModel = new DefaultTableModel(vData, vName);

@@ -53,7 +53,7 @@ public class TrainSchedule<R> extends CommonPlanningEntry<R> {
     /**
      * allocate the resource to the flight schedule
      * set the state as ALLOCATED
-     * @param resource
+     * @param resources
      * @return true if the resource is set and state is ALLOCATED
      */
     public Boolean allocateResource(R... resources) {

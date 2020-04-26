@@ -43,7 +43,7 @@ public abstract class PlanningEntryCollection {
 
     /**
      * cancel a plan
-     * @param planningEntry
+     * @param planningEntryNumber
      * @return true if cancelled successfully
      */
     public Boolean cancelPlanningEntry(String planningEntryNumber) {

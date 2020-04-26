@@ -10,10 +10,11 @@ import timeSlot.TimeSlot;
 public interface PlanningEntry<R> {
     /**
      * a factory method for generating an instance of Flight Schedule
+     * @param <R>
      * @param location
      * @param timeSlot
      * @param planningEntryNumber
-     * @return a empty instance of planning entry of Flight Schedule
+     * @return a empty instance of planning entry of  flight schedule
      */
     public static <R> FlightSchedule<R> newPlanningEntryOfFlightSchedule(Location location, TimeSlot timeSlot,
             String planningEntryNumber) {
@@ -22,10 +23,11 @@ public interface PlanningEntry<R> {
 
     /**
      * a factory method for generating an instance of Train Schedule
+     * @param <R>
      * @param location
      * @param timeSlot
      * @param planningEntryNumber
-     * @return a empty instance of planning entry of Train Schedule
+     * @return a empty instance of planning entry of train schedule
      */
     public static <R> TrainSchedule<R> newPlanningEntryOfTrainSchedule(Location location, TimeSlot timeSlot,
             String planningEntryNumber) {
@@ -33,11 +35,12 @@ public interface PlanningEntry<R> {
     }
 
     /**
-     * a factory method for generating an instance of Activity Calendar
+     *  a factory method for generating an instance of Activity Calendar
+     * @param <R>
      * @param location
      * @param timeSlot
      * @param planningEntryNumber
-     * @return a empty instance of planning entry of Activity Calendar
+     * @return a empty instance of planning entry of activity calendar
      */
     public static <R> ActivityCalendar<R> newPlanningEntryOfActivityCalendar(Location location, TimeSlot timeSlot,
             String planningEntryNumber) {

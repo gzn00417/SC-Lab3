@@ -76,7 +76,7 @@ public class FlightScheduleCollection extends PlanningEntryCollection {
      * @param strType
      * @param intSeats
      * @param age
-     * @return
+     * @return the allocated resource
      */
     public Resource allocateResource(String planningEntryNumber, String number, String strType, int intSeats,
             double age) {
