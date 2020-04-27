@@ -76,7 +76,7 @@ public class ActivityCalendarCollection extends PlanningEntryCollection {
     public Resource allocateResource(String planningEntryNumber, String docName, int docNumber) {
         Document document = (Document) this.getDocumentOfName(docName);
         return this.allocateResource(planningEntryNumber, docName, document.getStrPublishDepartment(),
-                document.getStrPublishDate().toString().replace('T', ' '), docNumber);
+                document.getPublishDate().toString().replace('T', ' '), docNumber);
     }
 
     public Resource getDocumentOfName(String docName) {
