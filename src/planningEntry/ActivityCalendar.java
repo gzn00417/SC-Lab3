@@ -97,7 +97,8 @@ public class ActivityCalendar<R> extends CommonPlanningEntry<R> {
      * @param strNewLocation
      */
     public void setNewLocation(String strNewLocation) {
-        this.location = new Location(strNewLocation);
+        if (this.getState().getStrState().equals("ALLOCATED"))
+            this.location = new Location(strNewLocation);
     }
 
     @Override
