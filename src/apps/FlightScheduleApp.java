@@ -36,7 +36,7 @@ public class FlightScheduleApp {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		readFile("data/FlightSchedule/FlightSchedule_2.txt");
+		readFile("data/FlightSchedule/FlightSchedule_1.txt");
 		// main
 		JFrame mainFrame = new JFrame("Flight Schedule");
 		mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -120,7 +120,7 @@ public class FlightScheduleApp {
 			}
 		}
 		bReader.close();
-		flightScheduleCollection.sortPlanningEntries();
+		// flightScheduleCollection.sortPlanningEntries();
 	}
 
 	/**
