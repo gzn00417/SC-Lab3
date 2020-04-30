@@ -364,7 +364,8 @@ public class FlightScheduleApp {
 		apisFrame.add(findPreEntryPanel);
 		// do
 		checkLocationConflictButton.addActionListener((e) -> {
-			boolean flag = PlanningEntryAPIs.checkLocationConflict(flightScheduleCollection.getAllPlanningEntries());
+			boolean flag = PlanningEntryAPIs.checkLocationConflict(flightScheduleCollection.getAllPlanningEntries(),
+					PlanningEntryAPIs.INDEX_SEARCH);
 			JOptionPane.showMessageDialog(apisFrame, flag ? "Conflict" : "No Conflict", "Checking Result",
 					JOptionPane.PLAIN_MESSAGE);
 		});

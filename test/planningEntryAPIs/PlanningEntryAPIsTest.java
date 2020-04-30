@@ -33,7 +33,7 @@ public class PlanningEntryAPIsTest {
                 entries.add(entry1);
                 entries.add(entry2);
                 entries.add(entry3);
-                assertFalse(PlanningEntryAPIs.checkLocationConflict(entries));
+                assertFalse(PlanningEntryAPIs.checkLocationConflict(entries, PlanningEntryAPIs.INDEX_SEARCH));
                 Location location4 = new Location("A");
                 TimeSlot timeSlot4 = new TimeSlot(Arrays.asList("2020-01-01 11:00"), Arrays.asList("2020-01-01 13:00"));
                 ActivityCalendar<Resource> entry4 = PlanningEntry.newPlanningEntryOfActivityCalendar(location4,
@@ -41,7 +41,7 @@ public class PlanningEntryAPIsTest {
                 entries.add(entry4);
                 assertTrue(entry4.getBeginningTime().isBefore(entry1.getEndingTime())
                                 && entry4.getEndingTime().isAfter(entry1.getBeginningTime()));
-                //assertTrue(PlanningEntryAPIs.checkLocationConflict(entries));
+                //assertTrue(PlanningEntryAPIs.checkLocationConflict(entries, PlanningEntryAPIs.ITERATOR_SEARCH));
         }
 
         @Test
