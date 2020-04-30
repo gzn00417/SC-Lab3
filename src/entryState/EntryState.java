@@ -20,6 +20,10 @@ public class EntryState {
      * it's a mutable object, but do not let the outside modify state directly
      */
 
+    /**
+     * constructor
+     * @param stateName
+     */
     public EntryState(String stateName) {
         this.state = EntryStateEnum.valueOf(stateName.toUpperCase());
         checkRep();
