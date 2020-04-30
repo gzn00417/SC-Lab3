@@ -120,7 +120,7 @@ public class ActivityCalendarApp {
             }
         }
         bReader.close();
-        flightScheduleCollection.sortPlanningEntries();
+        // flightScheduleCollection.sortPlanningEntries();
     }
 
     /**

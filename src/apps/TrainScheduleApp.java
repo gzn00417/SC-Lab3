@@ -120,7 +120,7 @@ public class TrainScheduleApp {
             }
         }
         bReader.close();
-        flightScheduleCollection.sortPlanningEntries();
+        // flightScheduleCollection.sortPlanningEntries();
     }
 
     /**
