@@ -36,7 +36,7 @@ public class TrainScheduleApp {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        readFile("data/FlightSchedule/FlightSchedule_2.txt");
+        // readFile("data/FlightSchedule/FlightSchedule_2.txt");
         // main
         JFrame mainFrame = new JFrame("Flight Schedule");
         mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -102,27 +102,28 @@ public class TrainScheduleApp {
      * @param strFile
      * @throws Exception
      */
+    /*
     public static void readFile(String strFile) throws Exception {
         BufferedReader bReader = new BufferedReader(new FileReader(new File(strFile)));
         String line = "";
         int cntLine = 0;
-        String stringInfo = "";
+        StringBuilder stringInfo = new StringBuilder("");
         while ((line = bReader.readLine()) != null) {
             if (line.equals(""))
                 continue;
-            stringInfo = stringInfo.concat(line + "\n");
+            stringInfo.append(line + "\n");
             cntLine++;
             if (cntLine % INPUT_ROWS_PER_UNIT == 0) {
                 FlightSchedule<Resource> flightSchedule = flightScheduleCollection.addPlanningEntry(stringInfo);
                 if (flightSchedule != null)
                     flightScheduleCollection.allocatePlanningEntry(flightSchedule.getPlanningEntryNumber(), stringInfo);
-                stringInfo = "";
+                stringInfo = new StringBuilder("");
             }
         }
         bReader.close();
         // flightScheduleCollection.sortPlanningEntries();
     }
-
+    */
     /**
      * visualization application
      */

@@ -97,31 +97,31 @@ public class FlightScheduleApp {
 		oneResourceEntriesButton.addActionListener((e) -> oneResourceEntries());
 	}
 
-	/**
-	 * read file and add planning entries in txt
-	 * @param strFile
-	 * @throws Exception
-	 */
-	public static void readFile(String strFile) throws Exception {
-		BufferedReader bReader = new BufferedReader(new FileReader(new File(strFile)));
-		String line = "";
-		int cntLine = 0;
-		String stringInfo = "";
-		while ((line = bReader.readLine()) != null) {
-			if (line.equals(""))
-				continue;
-			stringInfo = stringInfo.concat(line + "\n");
-			cntLine++;
-			if (cntLine % INPUT_ROWS_PER_UNIT == 0) {
-				FlightSchedule<Resource> flightSchedule = flightScheduleCollection.addPlanningEntry(stringInfo);
-				if (flightSchedule != null)
-					flightScheduleCollection.allocatePlanningEntry(flightSchedule.getPlanningEntryNumber(), stringInfo);
-				stringInfo = "";
-			}
-		}
-		bReader.close();
-		// flightScheduleCollection.sortPlanningEntries();
-	}
+	    /**
+	     * read file and add planning entries in txt
+	     * @param strFile
+	     * @throws Exception
+	     */
+	    public static void readFile(String strFile) throws Exception {
+	        BufferedReader bReader = new BufferedReader(new FileReader(new File(strFile)));
+	        String line = "";
+	        int cntLine = 0;
+	        StringBuilder stringInfo = new StringBuilder("");
+	        while ((line = bReader.readLine()) != null) {
+	            if (line.equals(""))
+	                continue;
+	            stringInfo.append(line + "\n");
+	            cntLine++;
+	            if (cntLine % INPUT_ROWS_PER_UNIT == 0) {
+	                FlightSchedule<Resource> flightSchedule = flightScheduleCollection.addPlanningEntry(stringInfo.toString());
+	                if (flightSchedule != null)
+	                    flightScheduleCollection.allocatePlanningEntry(flightSchedule.getPlanningEntryNumber(), stringInfo.toString());
+	                stringInfo = new StringBuilder("");
+	            }
+	        }
+	        bReader.close();
+	        // flightScheduleCollection.sortPlanningEntries();
+	    }
 
 	/**
 	 * visualization application
