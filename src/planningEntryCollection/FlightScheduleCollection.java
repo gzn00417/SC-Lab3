@@ -29,13 +29,13 @@ public class FlightScheduleCollection extends PlanningEntryCollection {
     }
 
     /**
-     * 
+     * generate a planning entry by given params
      * @param planningEntryNumber
      * @param departureAirport
      * @param arrivalAirport
      * @param departureTime
      * @param arrivalTime
-     * @return
+     * @return the flight schedule
      */
     public FlightSchedule<Resource> addPlanningEntry(String planningEntryNumber, String departureAirport,
             String arrivalAirport, String departureTime, String arrivalTime) {
@@ -70,7 +70,7 @@ public class FlightScheduleCollection extends PlanningEntryCollection {
     }
 
     /**
-     * 
+     * allocate resource with concrete params
      * @param planningEntryNumber
      * @param number
      * @param strType
