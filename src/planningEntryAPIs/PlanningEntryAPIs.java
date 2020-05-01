@@ -9,85 +9,14 @@ import java.util.Map;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class PlanningEntryAPIs {
-    public static final int INDEX_SEARCH = 0;
-    public static final String ITERATOR_SEARCH = "it";
-
+public abstract class PlanningEntryAPIs {
     /**
      * For Activity Calendar
      * check locations of planning entry in entries if they are conflicted
      * @param entries
      * @return true if there are locations conflict
      */
-    public static boolean checkLocationConflict(List<PlanningEntry<Resource>> entries, int a) {
-        Map<String, List<ActivityCalendar<Resource>>> locationMap = new HashMap<>();
-        for (int i = 0; i < entries.size(); i++) {
-            ActivityCalendar<Resource> activityCalendar = (ActivityCalendar<Resource>) entries.get(i);
-            String strLocation = activityCalendar.getStrLocation();
-            if (locationMap.keySet().contains(strLocation)) {
-                List<ActivityCalendar<Resource>> calendars = new ArrayList<>();
-                calendars.addAll(locationMap.get(strLocation));
-                calendars.add(activityCalendar);
-                for (ActivityCalendar<Resource> c1 : calendars) {
-                    for (ActivityCalendar<Resource> c2 : calendars)
-                        if (!c1.equals(c2)) {
-                            LocalDateTime t1b = c1.getBeginningTime(), t1e = c1.getEndingTime();
-                            LocalDateTime t2b = c2.getBeginningTime(), t2e = c2.getEndingTime();
-                            if ((t1b.isBefore(t2e) || t1b.isEqual(t2e)) && (t1e.isAfter(t2b) || t2e.isEqual(t2b)))
-                                return true;
-                        }
-                }
-                locationMap.remove(strLocation);
-                locationMap.put(strLocation, calendars);
-            } else {
-                locationMap.put(strLocation, new ArrayList<ActivityCalendar<Resource>>() {
-                    private static final long serialVersionUID = 1L;
-                    {
-                        add(activityCalendar);
-                    }
-                });
-            }
-        }
-        return false;
-    }
-
-    /**
-     * For Activity Calendar
-     * check locations of planning entry in entries if they are conflicted
-     * @param entries
-     * @return true if there are locations conflict
-     */
-    public static boolean checkLocationConflict(List<PlanningEntry<Resource>> entries, String a) {
-        Map<String, List<ActivityCalendar<Resource>>> locationMap = new HashMap<>();
-        for (int i = 0; i < entries.size(); i++) {
-            ActivityCalendar<Resource> activityCalendar = (ActivityCalendar<Resource>) entries.get(i);
-            String strLocation = activityCalendar.getStrLocation();
-            if (locationMap.keySet().contains(strLocation)) {
-                List<ActivityCalendar<Resource>> calendars = new ArrayList<>();
-                calendars.addAll(locationMap.get(strLocation));
-                calendars.add(activityCalendar);
-                for (ActivityCalendar<Resource> c1 : calendars) {
-                    for (ActivityCalendar<Resource> c2 : calendars)
-                        if (!c1.equals(c2)) {
-                            LocalDateTime t1b = c1.getBeginningTime(), t1e = c1.getEndingTime();
-                            LocalDateTime t2b = c2.getBeginningTime(), t2e = c2.getEndingTime();
-                            if ((t1b.isBefore(t2e) || t1b.isEqual(t2e)) && (t1e.isAfter(t2b) || t2e.isEqual(t2b)))
-                                return true;
-                        }
-                }
-                locationMap.remove(strLocation);
-                locationMap.put(strLocation, calendars);
-            } else {
-                locationMap.put(strLocation, new ArrayList<ActivityCalendar<Resource>>() {
-                    private static final long serialVersionUID = 1L;
-                    {
-                        add(activityCalendar);
-                    }
-                });
-            }
-        }
-        return false;
-    }
+    public abstract boolean checkLocationConflict(List<PlanningEntry<Resource>> entries);
 
     /**
      * For Flight Schedule and Train Schedule

@@ -16,7 +16,7 @@ import java.util.List;
 
 public class PlanningEntryAPIsTest {
         @Test
-        public void testCheckLocationConflict() {
+        public void testCheckLocationConflictWithFirst() {
                 List<PlanningEntry<Resource>> entries = new ArrayList<>();
                 Location location1 = new Location("A");
                 TimeSlot timeSlot1 = new TimeSlot(Arrays.asList("2020-01-01 10:00"), Arrays.asList("2020-01-01 12:00"));
@@ -33,7 +33,36 @@ public class PlanningEntryAPIsTest {
                 entries.add(entry1);
                 entries.add(entry2);
                 entries.add(entry3);
-                assertFalse(PlanningEntryAPIs.checkLocationConflict(entries, PlanningEntryAPIs.INDEX_SEARCH));
+                assertFalse((new PlanningEntryAPIsFirst()).checkLocationConflict(entries));
+                Location location4 = new Location("A");
+                TimeSlot timeSlot4 = new TimeSlot(Arrays.asList("2020-01-01 11:00"), Arrays.asList("2020-01-01 13:00"));
+                ActivityCalendar<Resource> entry4 = PlanningEntry.newPlanningEntryOfActivityCalendar(location4,
+                                timeSlot4, "4");
+                entries.add(entry4);
+                assertTrue(entry4.getBeginningTime().isBefore(entry1.getEndingTime())
+                                && entry4.getEndingTime().isAfter(entry1.getBeginningTime()));
+                //assertTrue(PlanningEntryAPIs.checkLocationConflict(entries, PlanningEntryAPIs.ITERATOR_SEARCH));
+        }
+
+        @Test
+        public void testCheckLocationConflictWithSecond() {
+                List<PlanningEntry<Resource>> entries = new ArrayList<>();
+                Location location1 = new Location("A");
+                TimeSlot timeSlot1 = new TimeSlot(Arrays.asList("2020-01-01 10:00"), Arrays.asList("2020-01-01 12:00"));
+                ActivityCalendar<Resource> entry1 = PlanningEntry.newPlanningEntryOfActivityCalendar(location1,
+                                timeSlot1, "1");
+                Location location2 = new Location("A");
+                TimeSlot timeSlot2 = new TimeSlot(Arrays.asList("2020-01-02 10:00"), Arrays.asList("2020-01-02 12:00"));
+                ActivityCalendar<Resource> entry2 = PlanningEntry.newPlanningEntryOfActivityCalendar(location2,
+                                timeSlot2, "2");
+                Location location3 = new Location("B");
+                TimeSlot timeSlot3 = new TimeSlot(Arrays.asList("2020-01-01 10:00"), Arrays.asList("2020-01-01 12:00"));
+                ActivityCalendar<Resource> entry3 = PlanningEntry.newPlanningEntryOfActivityCalendar(location3,
+                                timeSlot3, "3");
+                entries.add(entry1);
+                entries.add(entry2);
+                entries.add(entry3);
+                assertFalse((new PlanningEntryAPIsSecond()).checkLocationConflict(entries));
                 Location location4 = new Location("A");
                 TimeSlot timeSlot4 = new TimeSlot(Arrays.asList("2020-01-01 11:00"), Arrays.asList("2020-01-01 13:00"));
                 ActivityCalendar<Resource> entry4 = PlanningEntry.newPlanningEntryOfActivityCalendar(location4,

@@ -113,9 +113,11 @@ public class ActivityCalendarApp {
             stringInfo.append(line + "\n");
             cntLine++;
             if (cntLine % INPUT_ROWS_PER_UNIT == 0) {
-                FlightSchedule<Resource> flightSchedule = flightScheduleCollection.addPlanningEntry(stringInfo.toString());
+                FlightSchedule<Resource> flightSchedule = flightScheduleCollection
+                        .addPlanningEntry(stringInfo.toString());
                 if (flightSchedule != null)
-                    flightScheduleCollection.allocatePlanningEntry(flightSchedule.getPlanningEntryNumber(), stringInfo.toString());
+                    flightScheduleCollection.allocatePlanningEntry(flightSchedule.getPlanningEntryNumber(),
+                            stringInfo.toString());
                 stringInfo = new StringBuilder("");
             }
         }
@@ -364,8 +366,8 @@ public class ActivityCalendarApp {
         apisFrame.add(findPreEntryPanel);
         // do
         checkLocationConflictButton.addActionListener((e) -> {
-            boolean flag = PlanningEntryAPIs.checkLocationConflict(flightScheduleCollection.getAllPlanningEntries(),
-                    PlanningEntryAPIs.ITERATOR_SEARCH);
+            boolean flag = (new PlanningEntryAPIsFirst())
+                    .checkLocationConflict(flightScheduleCollection.getAllPlanningEntries());
             JOptionPane.showMessageDialog(apisFrame, flag ? "Conflict" : "No Conflict", "Checking Result",
                     JOptionPane.PLAIN_MESSAGE);
         });
@@ -424,7 +426,7 @@ public class ActivityCalendarApp {
             if (terminal.isBlank())
                 terminal = ((FlightSchedule<Resource>) flightScheduleCollection
                         .getPlanningEntryByStrNumber(planningEntryNumber)).getLocationTerminal();
-            Location newLocation = new Location(origin, terminal);
+            // Location newLocation = new Location(origin, terminal);
         });
     }
 
