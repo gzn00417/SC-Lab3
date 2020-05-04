@@ -67,21 +67,17 @@ public abstract class PlanningEntryAPIs {
      */
     public static PlanningEntry<Resource> findPreEntryPerResource(Resource r, PlanningEntry<Resource> e,
             List<PlanningEntry<Resource>> entries) {
-        List<PlanningEntry<Resource>> entryList = new ArrayList<>();
-        for (int i = 0; i < entries.size(); i++) {
-            if (entries.get(i).getResource().equals(e.getResource())) {
-                entryList.add(entries.get(i));
-            }
-        }
         LocalDateTime latestDateTime = LocalDateTime.MIN;
         PlanningEntry<Resource> prePlanningEntry = null;
-        for (int i = 0; i < entryList.size(); i++) {
-            PlanningEntry<Resource> planningEntry = entryList.get(i);
-            LocalDateTime endingTime = ((FlightSchedule<Resource>) planningEntry).getTimeArrival();
-            if (endingTime.isAfter(latestDateTime)
-                    && endingTime.isBefore(((FlightSchedule<Resource>) e).getTimeLeaving())) {
-                latestDateTime = endingTime;
-                prePlanningEntry = planningEntry;
+        for (int i = 0; i < entries.size(); i++) {
+            if (entries.get(i).getResource().equals(e.getResource())) {
+                PlanningEntry<Resource> planningEntry = entries.get(i);
+                LocalDateTime endingTime = ((FlightSchedule<Resource>) planningEntry).getTimeArrival();
+                if (endingTime.isAfter(latestDateTime)
+                        && endingTime.isBefore(((FlightSchedule<Resource>) e).getTimeLeaving())) {
+                    latestDateTime = endingTime;
+                    prePlanningEntry = planningEntry;
+                }
             }
         }
         return prePlanningEntry;
