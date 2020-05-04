@@ -479,19 +479,28 @@ public class FlightScheduleApp {
 	public static void manageLocation() {
 		// frame
 		JFrame locationFrame = new JFrame("Manage Location");
-		locationFrame.setLayout(new GridLayout(2, 1));
+		locationFrame.setLayout(new GridLayout(3, 1));
 		locationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		locationFrame.setVisible(true);
 		locationFrame.setSize(400, 300);
 		// delete button
 		JPanel topPanel = new JPanel();
 		topPanel.setLayout(new FlowLayout());
-		topPanel.add(new JLabel("Deleting Resource:"));
+		topPanel.add(new JLabel("Deleting Location:"));
 		JTextField topText = new JTextField(LINE_WIDTH);
 		topPanel.add(topText);
 		JButton deleteButton = new JButton("Delete");
 		topPanel.add(deleteButton);
 		locationFrame.add(topPanel);
+		// add button
+		JPanel topPanel1 = new JPanel();
+		topPanel1.setLayout(new FlowLayout());
+		topPanel1.add(new JLabel("Adding Location:"));
+		JTextField topText1 = new JTextField(LINE_WIDTH);
+		topPanel1.add(topText1);
+		JButton addButton = new JButton("Add");
+		topPanel1.add(addButton);
+		locationFrame.add(topPanel1);
 		// JScrollPane
 		String locationsStrings = "";
 		Set<String> allLocation = flightScheduleCollection.getAllLocation();
@@ -514,6 +523,9 @@ public class FlightScheduleApp {
 		});
 	}
 
+	/**
+	 * 
+	 */
 	public static void oneResourceEntries() {
 		// frame
 		JFrame oneResourceEntriesFrame = new JFrame("One Resource Entries");

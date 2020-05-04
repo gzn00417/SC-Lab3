@@ -38,9 +38,9 @@ public class TrainScheduleApp {
     public static void main(String[] args) throws Exception {
         // readFile("data/FlightSchedule/FlightSchedule_2.txt");
         // main
-        JFrame mainFrame = new JFrame("Flight Schedule");
+        JFrame mainFrame = new JFrame("Train Schedule");
         mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        mainFrame.setLayout(new GridLayout(3, 3, 10, 5));
+        mainFrame.setLayout(new GridLayout(5, 2, 10, 5));
         mainFrame.setVisible(true);
         mainFrame.setSize(800, 300);
         // visualization

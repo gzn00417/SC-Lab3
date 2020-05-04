@@ -39,7 +39,7 @@ public class ActivityCalendarApp {
     public static void main(String[] args) throws Exception {
         readFile("data/FlightSchedule/FlightSchedule_2.txt");
         // main
-        JFrame mainFrame = new JFrame("Flight Schedule");
+        JFrame mainFrame = new JFrame("Activity Calendar");
         mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         mainFrame.setLayout(new GridLayout(2, 5, 10, 5));
         mainFrame.setVisible(true);
