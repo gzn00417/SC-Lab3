@@ -12,7 +12,7 @@ public class TrainScheduleData {
         for (int i = 1; i <= N; i++) {
             String planningDate = "2020-01-01";
             String planningNumber = String.valueOf(i);
-            String trainNumber = String.valueOf(Math.random());
+            String trainNumber = "A" + String.valueOf((int) (Math.random() * 1000));
             String trainType = "Business";
             String trainCapacity = String.valueOf(100);
             String stations = "";
