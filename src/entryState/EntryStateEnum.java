@@ -46,7 +46,7 @@ public enum EntryStateEnum {
     /**
      * define which is able to be blocked
      */
-    public static final List<String> keyWords = new ArrayList<String>() {
+    public static final List<String> BlockAbleKeyWords = new ArrayList<String>() {
         private static final long serialVersionUID = 1L;
         {
             add("Train");
@@ -59,7 +59,7 @@ public enum EntryStateEnum {
      * @return array of the states
      */
     public EntryStateEnum[] newStateAchievable(String strPlanningEntryType) {
-        for (String str : keyWords)
+        for (String str : BlockAbleKeyWords)
             if (strPlanningEntryType.contains(str))
                 return EntryStateEnum.newStateAchievableBlockedAble.get(this);
         return EntryStateEnum.newStateAchievableBlockedDisable.get(this);
